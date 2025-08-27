@@ -754,6 +754,7 @@ GameObject:
   - component: {fileID: 4491367652571358470}
   - component: {fileID: 269772158992284853}
   - component: {fileID: 8650971851136463656}
+  - component: {fileID: 132068634795799537}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -785,7 +786,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8195108968170372752}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d802920b5f1124a778f16c31c3373388, type: 2}
   m_CullingMode: 0
@@ -896,8 +897,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  rotateVisual: {fileID: 0}
-  fireKey: 323
   skill1Key: 113
   skill2Key: 101
   skill3Key: 114
@@ -990,3 +989,17 @@ MonoBehaviour:
   minFlightTime: 0.4
   maxFlightTime: 1.1
   preferHorizSpeed: 10
+  targetHeightOffset: 1
+--- !u!114 &132068634795799537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195108968170372752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d65a8ad932a0a4d9f61531c9236299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visual: {fileID: 0}

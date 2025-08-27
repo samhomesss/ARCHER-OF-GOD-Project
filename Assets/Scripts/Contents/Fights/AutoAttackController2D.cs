@@ -16,6 +16,7 @@ public class AutoAttackController2D : MonoBehaviour
     [SerializeField] private float minFlightTime = 0.4f;
     [SerializeField] private float maxFlightTime = 1.1f;
     [SerializeField] private float preferHorizSpeed = 10f;
+    [SerializeField] private float targetHeightOffset = 2f;
 
     private float _nextTime;
     private SkillBase2D[] _skills;
@@ -65,6 +66,7 @@ public class AutoAttackController2D : MonoBehaviour
 
     private void ShootBallistic(Vector2 targetPos)
     {
+        targetPos += Vector2.up * targetHeightOffset;
         Vector2 p0 = firePoint.position;
         Vector2 delta = targetPos - p0;
         float g = Mathf.Abs(Physics2D.gravity.y) * gravityScale;

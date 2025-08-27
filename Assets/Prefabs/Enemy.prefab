@@ -754,6 +754,8 @@ GameObject:
   - component: {fileID: 6558032614795527779}
   - component: {fileID: 8592272594506348715}
   - component: {fileID: 6953743639742541464}
+  - component: {fileID: 2186140577351908289}
+  - component: {fileID: 6526006056251416323}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -966,8 +968,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   moveSpeed: 5
-  moveRadius: 6
-  moveDuration: 1.75
+  moveDistance: 3
+  leftLimit: {fileID: 0}
+  rightLimit: {fileID: 0}
   pauseBeforeSkill: 0.35
 --- !u!114 &6953743639742541464
 MonoBehaviour:
@@ -989,3 +992,37 @@ MonoBehaviour:
   minFlightTime: 0.4
   maxFlightTime: 1.1
   preferHorizSpeed: 10
+  targetHeightOffset: 1
+--- !u!114 &2186140577351908289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6904773048e71df42967be73d7f5236a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  interval: 0.6
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  gravityScale: 1.5
+  minFlightTime: 0.4
+  maxFlightTime: 1.1
+  preferHorizSpeed: 10
+--- !u!114 &6526006056251416323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d65a8ad932a0a4d9f61531c9236299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visual: {fileID: 0}
