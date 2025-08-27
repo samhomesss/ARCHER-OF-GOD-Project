@@ -19,15 +19,16 @@ public class PlayerController2D : MonoBehaviour
     private BowShooter2D _shooter;
     private SkillBase2D[] _skills;
 
-
     private Facing2D _facing;
+    private AutoAttackController2D _autoAttack;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _shooter = GetComponent<BowShooter2D>();
         _skills = GetComponents<SkillBase2D>();
-        _facing = GetComponent<Facing2D>(); // ★ 추가
+        _facing = GetComponent<Facing2D>();
+        _autoAttack = GetComponent<AutoAttackController2D>();
     }
 
     void Update()
@@ -47,8 +48,19 @@ public class PlayerController2D : MonoBehaviour
         Vector2 dir = new Vector2(h, 0f).normalized;
         _rb.linearVelocity = dir * moveSpeed;
 
-        // ★ 스케일 플립으로만 좌/우 전환
-        if (_facing) _facing.FaceByInput(h);
+        if (_facing)
+        {
+            if (Mathf.Abs(h) > 0.01f)
+            {
+                _facing.FaceByInput(h);
+            }
+            else if (_autoAttack && _autoAttack.Target)
+            {
+                float diff = _autoAttack.Target.position.x - transform.position.x;
+                if (Mathf.Abs(diff) > 0.01f)
+                    _facing.Face(diff < 0 ? -1 : 1);
+            }
+        }
     }
 
 

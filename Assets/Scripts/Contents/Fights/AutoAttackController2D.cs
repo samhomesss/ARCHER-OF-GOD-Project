@@ -1,42 +1,38 @@
 using UnityEngine;
 
-
 [DisallowMultipleComponent]
 public class AutoAttackController2D : MonoBehaviour
 {
     [Header("Target")]
-    [SerializeField] private Transform target; // assign at runtime if null
-
+    [SerializeField] private Transform target;
 
     [Header("Attack Timing")]
     [SerializeField] private float interval = 0.5f;
 
-
     [Header("Ballistic Settings")]
     [SerializeField] private Projectile2D projectilePrefab;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float gravityScale = 1.5f; // effective gravity for projectile
+    [SerializeField] private float gravityScale = 1.5f;
     [SerializeField] private float minFlightTime = 0.4f;
     [SerializeField] private float maxFlightTime = 1.1f;
     [SerializeField] private float preferHorizSpeed = 10f;
 
-
     private float _nextTime;
     private SkillBase2D[] _skills;
-    private Facing2D _facing;  // ★ 추가
+    private Facing2D _facing;
+    private Rigidbody2D _rb;
 
     void Awake()
     {
         _skills = GetComponents<SkillBase2D>();
-        _facing = GetComponent<Facing2D>(); // ★
+        _facing = GetComponent<Facing2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
-
 
     void Start()
     {
         if (target == null)
         {
-            // If this is the player, target enemy by tag; if enemy, target player by tag
             string desiredTag = CompareTag("Player") ? "Enemy" : "Player";
             var t = GameObject.FindGameObjectWithTag(desiredTag);
             if (t) target = t.transform;
@@ -44,13 +40,12 @@ public class AutoAttackController2D : MonoBehaviour
         _nextTime = Time.time + interval;
     }
 
-
     void Update()
     {
         if (Time.time < _nextTime) return;
         if (IsCastingAnySkill()) return;
         if (!target || !projectilePrefab || !firePoint) return;
-
+        if (CompareTag("Player") && _rb && Mathf.Abs(_rb.linearVelocity.x) > 0.01f) return;
 
         ShootBallistic(target.position);
         _nextTime = Time.time + interval;
@@ -66,6 +61,7 @@ public class AutoAttackController2D : MonoBehaviour
         return false;
     }
 
+    public Transform Target => target;
 
     private void ShootBallistic(Vector2 targetPos)
     {
@@ -78,7 +74,6 @@ public class AutoAttackController2D : MonoBehaviour
         float vx = delta.x / t;
         float vy = (delta.y + 0.5f * g * t * t) / t;
 
-        // ★ 발사 직전 시각만 스케일 플립
         if (_facing) _facing.FaceByVelocityX(vx);
 
         var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
