@@ -45,7 +45,7 @@ public class AutoAttackController2D : MonoBehaviour
         if (Time.time < _nextTime) return;
         if (IsCastingAnySkill()) return;
         if (!target || !projectilePrefab || !firePoint) return;
-        if (CompareTag("Player") && _rb && Mathf.Abs(_rb.linearVelocity.x) > 0.01f) return;
+        if (_rb && Mathf.Abs(_rb.linearVelocity.x) > 0.01f) return;
 
         ShootBallistic(target.position);
         _nextTime = Time.time + interval;

@@ -41,8 +41,8 @@ public class EnemyController2D : MonoBehaviour
 
     private void MoveTowards(Vector2 dest)
     {
-        Vector2 dir = (dest - (Vector2)transform.position).normalized;
-        _rb.linearVelocity = dir * moveSpeed;
+        Vector2 dir = new Vector2(dest.x - transform.position.x, 0f).normalized;
+        _rb.linearVelocity = new Vector2(dir.x * moveSpeed, 0f);
 
         if (_facing) _facing.FaceByVelocityX(dir.x);
     }
@@ -70,11 +70,11 @@ public class EnemyController2D : MonoBehaviour
             // MOVE phase
             _state = BotState.Move;
             float endTime = Time.time + moveDuration;
-            Vector2 moveTarget = (Vector2)transform.position + Random.insideUnitCircle.normalized * moveRadius;
+            float offsetX = Random.Range(-moveRadius, moveRadius);
+            Vector2 moveTarget = new Vector2(transform.position.x + offsetX, transform.position.y);
             while (Time.time < endTime)
             {
                 MoveTowards(moveTarget);
-                FaceTargetX();
                 yield return null;
             }
             _rb.linearVelocity = Vector2.zero;
