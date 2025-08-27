@@ -45,6 +45,7 @@ public class PlayerController2D : MonoBehaviour
     private void HandleMovement()
     {
         float h = Input.GetAxisRaw("Horizontal");
+        Debug.Log("좌우 값 : " + h);
         Vector2 dir = new Vector2(h, 0f).normalized;
         _rb.linearVelocity = dir * moveSpeed;
 
@@ -52,13 +53,14 @@ public class PlayerController2D : MonoBehaviour
         {
             if (Mathf.Abs(h) > 0.01f)
             {
+                Debug.Log("좌우 값 : " + h);
                 _facing.FaceByInput(h);
             }
             else if (_autoAttack && _autoAttack.Target)
             {
                 float diff = _autoAttack.Target.position.x - transform.position.x;
                 if (Mathf.Abs(diff) > 0.01f)
-                    _facing.Face(diff < 0 ? -1 : 1);
+                    _facing.Face(diff < 0 ? 1 : -1);
             }
         }
     }
