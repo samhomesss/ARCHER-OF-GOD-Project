@@ -75,13 +75,11 @@ public class AutoAttackController2D : MonoBehaviour
         float t = Mathf.Clamp(distX / Mathf.Max(0.01f, preferHorizSpeed), minFlightTime, maxFlightTime);
         float vx = delta.x / t;
         float vy = (delta.y + 0.5f * g * t * t) / t;
+        float jumpPower = (vy * vy) / (2f * g);
 
         if (_facing) _facing.FaceByVelocityX(vx);
 
         var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
-        var rb = proj.GetComponent<Rigidbody2D>();
-        if (rb) rb.gravityScale = gravityScale;
-
-        proj.FireWithVelocity(new Vector2(vx, vy), gameObject.tag);
+        proj.FireArc(targetPos, t, jumpPower, gameObject.tag);
     }
 }

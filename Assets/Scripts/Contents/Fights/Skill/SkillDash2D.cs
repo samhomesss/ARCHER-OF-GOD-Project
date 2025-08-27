@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SkillDash2D : SkillBase2D
@@ -13,6 +13,7 @@ public class SkillDash2D : SkillBase2D
     private Rigidbody2D _rb;
     private Health2D _health;
     private bool _dashing;
+    private Tween _dashTween;
 
 
     void Awake()
@@ -26,38 +27,32 @@ public class SkillDash2D : SkillBase2D
     {
         if (_dashing) return false;
         Debug.Log("대쉬 하는중");
-;       Vector2 moveDir = GetPreferredDirection();
+        Vector2 moveDir = GetPreferredDirection();
         if (moveDir.sqrMagnitude < 0.0001f) moveDir = transform.right;
         BeginCast();
-        StartCoroutine(DashRoutine(moveDir.normalized));
+        PerformDash(moveDir.normalized);
         return true;
     }
 
-    private IEnumerator DashRoutine(Vector2 dir)
+    private void PerformDash(Vector2 dir)
     {
         _dashing = true;
-        float t = 0f;
-        float speed = dashDistance / Mathf.Max(0.01f, dashDuration);
         var originalLayer = gameObject.layer;
-
-
         if (invulnerableDuringDash)
             gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 
-
-        while (t < dashDuration)
-        {
-            _rb.linearVelocity = dir * speed;
-            t += Time.deltaTime;
-            yield return null;
-        }
-
-
-        _rb.linearVelocity = Vector2.zero;
-        gameObject.layer = originalLayer;
-        _dashing = false;
-        EndCast();
+        Vector2 target = _rb.position + dir * dashDistance;
+        _dashTween?.Kill();
+        _dashTween = _rb.DOMove(target, dashDuration)
+                        .SetEase(Ease.Linear)
+                        .OnComplete(() =>
+                        {
+                            gameObject.layer = originalLayer;
+                            _dashing = false;
+                            EndCast();
+                        });
     }
+
 
 
     private Vector2 GetPreferredDirection()

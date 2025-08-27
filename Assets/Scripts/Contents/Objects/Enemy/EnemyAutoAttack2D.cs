@@ -49,12 +49,10 @@ public class EnemyAutoAttack2D : MonoBehaviour
 
         float vx = delta.x / t;
         float vy = (delta.y + 0.5f * g * t * t) / t;
+        float jumpPower = (vy * vy) / (2f * g);
 
         var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
-        var rb = proj.GetComponent<Rigidbody2D>();
-        if (rb) rb.gravityScale = gravityScale;
-
-        proj.FireWithVelocity(new Vector2(vx, vy), gameObject.tag);
+        proj.FireArc(p1, t, jumpPower, gameObject.tag);
 
         // face shot direction using rotation (0 right, 180 left)
         if (vx != 0f)
