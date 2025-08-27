@@ -4,6 +4,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BowShooter2D))]
+[RequireComponent(typeof(EnemyAutoAttack2D))]
 public class EnemyController2D : MonoBehaviour
 {
     public enum BotState { Move, Pause, Skill }
@@ -15,8 +16,9 @@ public class EnemyController2D : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float moveRadius = 6f;
-    [SerializeField] private float moveDuration = 1.6f;
+    [SerializeField] private float moveDistance = 3f;
+    [SerializeField] private Transform leftLimit;
+    [SerializeField] private Transform rightLimit;
 
 
     [Header("Rhythm")]
@@ -28,20 +30,33 @@ public class EnemyController2D : MonoBehaviour
     private SkillBase2D[] _skills;
     private BotState _state;
 
-
     private Facing2D _facing;
+    private EnemyAutoAttack2D _autoAttack;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _shooter = GetComponent<BowShooter2D>();
         _skills = GetComponents<SkillBase2D>();
-        _facing = GetComponent<Facing2D>(); 
+        _facing = GetComponent<Facing2D>();
+        _autoAttack = GetComponent<EnemyAutoAttack2D>();
     }
 
     private void MoveTowards(Vector2 dest)
     {
+        float minX = leftLimit ? leftLimit.position.x : float.NegativeInfinity;
+        float maxX = rightLimit ? rightLimit.position.x : float.PositiveInfinity;
+        dest.x = Mathf.Clamp(dest.x, minX, maxX);
+
         Vector2 dir = new Vector2(dest.x - transform.position.x, 0f).normalized;
+
+        if ((dir.x < 0f && transform.position.x <= minX) ||
+            (dir.x > 0f && transform.position.x >= maxX))
+        {
+            _rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         _rb.linearVelocity = new Vector2(dir.x * moveSpeed, 0f);
 
         if (_facing) _facing.FaceByVelocityX(dir.x);
@@ -69,10 +84,16 @@ public class EnemyController2D : MonoBehaviour
         {
             // MOVE phase
             _state = BotState.Move;
-            float endTime = Time.time + moveDuration;
-            float offsetX = Random.Range(-moveRadius, moveRadius);
-            Vector2 moveTarget = new Vector2(transform.position.x + offsetX, transform.position.y);
-            while (Time.time < endTime)
+            float dir = Random.value < 0.5f ? -1f : 1f;
+            float targetX = transform.position.x + dir * moveDistance;
+            if (leftLimit && rightLimit)
+            {
+                float minX = Mathf.Min(leftLimit.position.x, rightLimit.position.x);
+                float maxX = Mathf.Max(leftLimit.position.x, rightLimit.position.x);
+                targetX = Mathf.Clamp(targetX, minX, maxX);
+            }
+            Vector2 moveTarget = new Vector2(targetX, transform.position.y);
+            while (Mathf.Abs(transform.position.x - moveTarget.x) > 0.05f)
             {
                 MoveTowards(moveTarget);
                 yield return null;
@@ -86,10 +107,11 @@ public class EnemyController2D : MonoBehaviour
             yield return new WaitForSeconds(pauseBeforeSkill);
 
 
-            // SKILL phase (pick first ready)
+            // SKILL phase (attack once after moving)
             _state = BotState.Skill;
+            if (_autoAttack)
+                _autoAttack.Fire();
             TryRandomReadySkill();
-
 
             // short beat to avoid too frequent skill spam
             yield return new WaitForSeconds(0.25f);

@@ -34,9 +34,9 @@ public class Projectile2D : MonoBehaviour
     }
     public void FireWithVelocity(Vector2 initialVelocity, string owner)
     {
-        ownerTag = owner;        // ���� �ʵ� �״�� ���
+        ownerTag = owner;        
         _rb.linearVelocity = initialVelocity;
-        _timer = 0f;             // ���� Ÿ�̸� ����
+        _timer = 0f;             
     }
 
 
@@ -71,7 +71,7 @@ public class Projectile2D : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if (!other.isTrigger)
+        else if (!other.isTrigger || !other.CompareTag("Wall"))
         {
             // hit environment
             Destroy(gameObject);

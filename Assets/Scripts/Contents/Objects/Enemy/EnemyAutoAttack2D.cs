@@ -1,15 +1,12 @@
 using UnityEngine;
 
-
 public class EnemyAutoAttack2D : MonoBehaviour
 {
     [Header("Target")]
     [SerializeField] private Transform target; // Player
 
-
     [Header("Attack Timing")]
     [SerializeField] private float interval = 0.6f;
-
 
     [Header("Ballistic Settings")]
     [SerializeField] private Projectile2D projectilePrefab;
@@ -19,9 +16,7 @@ public class EnemyAutoAttack2D : MonoBehaviour
     [SerializeField] private float maxFlightTime = 1.1f;
     [SerializeField] private float preferHorizSpeed = 10f;
 
-
     private float _nextTime;
-
 
     void Start()
     {
@@ -33,17 +28,14 @@ public class EnemyAutoAttack2D : MonoBehaviour
         _nextTime = Time.time + interval;
     }
 
-
-    void Update()
+    public void Fire()
     {
         if (Time.time < _nextTime) return;
         if (!target || !projectilePrefab || !firePoint) return;
 
-
         FireBallistic();
         _nextTime = Time.time + interval;
     }
-
 
     private void FireBallistic()
     {
@@ -53,23 +45,18 @@ public class EnemyAutoAttack2D : MonoBehaviour
         float g = Mathf.Abs(Physics2D.gravity.y) * gravityScale;
         float dist = Mathf.Max(0.01f, Mathf.Abs(delta.x));
 
-
         float t = Mathf.Clamp(dist / Mathf.Max(0.01f, preferHorizSpeed), minFlightTime, maxFlightTime);
-
 
         float vx = delta.x / t;
         float vy = (delta.y + 0.5f * g * t * t) / t;
-
 
         var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
         var rb = proj.GetComponent<Rigidbody2D>();
         if (rb) rb.gravityScale = gravityScale;
 
-
         proj.FireWithVelocity(new Vector2(vx, vy), gameObject.tag);
 
-
-        // face shot direction using rotation (0¡Æ right, 180¡Æ left)
+        // face shot direction using rotation (0 right, 180 left)
         if (vx != 0f)
         {
             float z = (vx < 0f) ? 180f : 0f;
