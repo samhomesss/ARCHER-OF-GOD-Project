@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
 [DisallowMultipleComponent]
 public class Health2D : MonoBehaviour, IDamageable2D
 {

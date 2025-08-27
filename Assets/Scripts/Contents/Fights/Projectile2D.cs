@@ -32,6 +32,12 @@ public class Projectile2D : MonoBehaviour
         _rb.linearVelocity = dir.normalized * speed;
         _timer = 0f;
     }
+    public void FireWithVelocity(Vector2 initialVelocity, string owner)
+    {
+        ownerTag = owner;        // ���� �ʵ� �״�� ���
+        _rb.linearVelocity = initialVelocity;
+        _timer = 0f;             // ���� Ÿ�̸� ����
+    }
 
 
     void Update()

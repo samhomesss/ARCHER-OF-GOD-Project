@@ -9,12 +9,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float moveSpeed = 6f;
 
 
-    [Header("Aim")]
-    [SerializeField] private Transform rotateVisual; // optional: sprite or child that points right
-
-
     [Header("Input Keys")]
-    [SerializeField] private KeyCode fireKey = KeyCode.Mouse0;
     [SerializeField] private KeyCode skill1Key = KeyCode.Q;
     [SerializeField] private KeyCode skill2Key = KeyCode.E;
     [SerializeField] private KeyCode skill3Key = KeyCode.R;
@@ -25,58 +20,35 @@ public class PlayerController2D : MonoBehaviour
     private SkillBase2D[] _skills;
 
 
+    private Facing2D _facing;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _shooter = GetComponent<BowShooter2D>();
         _skills = GetComponents<SkillBase2D>();
+        _facing = GetComponent<Facing2D>(); // ★ 추가
     }
-
 
     void Update()
     {
-        HandleAim();
-        HandleFire();
+        // 마우스 에임 완전 제거
         HandleSkills();
     }
-
 
     void FixedUpdate()
     {
         HandleMovement();
     }
 
-
     private void HandleMovement()
     {
         float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector2 dir = new Vector2(h, v).normalized;
+        Vector2 dir = new Vector2(h, 0f).normalized;
         _rb.linearVelocity = dir * moveSpeed;
-    }
 
-
-    private void HandleAim()
-    {
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 aimDir = (mouseWorld - transform.position);
-        aimDir.z = 0;
-        if (aimDir.sqrMagnitude > 0.0001f)
-        {
-            float ang = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, ang);
-            if (rotateVisual) rotateVisual.right = aimDir.normalized;
-        }
-    }
-
-
-    private void HandleFire()
-    {
-        if (Input.GetKey(fireKey))
-        {
-            Vector2 forward = transform.right;
-            _shooter.Fire(forward, gameObject.tag);
-        }
+        // ★ 스케일 플립으로만 좌/우 전환
+        if (_facing) _facing.FaceByInput(h);
     }
 
 

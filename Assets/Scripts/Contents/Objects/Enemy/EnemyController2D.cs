@@ -4,28 +4,23 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BowShooter2D))]
-public class BotController2D : MonoBehaviour
+public class EnemyController2D : MonoBehaviour
 {
-    public enum BotState { Move, Attack, Skill }
+    public enum BotState { Move, Pause, Skill }
 
 
     [Header("Refs")]
-    [SerializeField] private Transform target; // assign Player transform
+    [SerializeField] private Transform target; // Player
 
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float moveRadius = 6f;
-    [SerializeField] private float moveDuration = 1.75f;
+    [SerializeField] private float moveDuration = 1.6f;
 
 
-    [Header("Attack")]
-    [SerializeField] private float attackDuration = 1.2f;
-    [SerializeField] private float aimJitterDegrees = 5f;
-
-
-    [Header("Skill Phase")]
-    [SerializeField] private float skillPause = 0.4f; // small pause before skill
+    [Header("Rhythm")]
+    [SerializeField] private float pauseBeforeSkill = 0.35f;
 
 
     private Rigidbody2D _rb;
@@ -33,11 +28,29 @@ public class BotController2D : MonoBehaviour
     private SkillBase2D[] _skills;
     private BotState _state;
 
+
+    private Facing2D _facing;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _shooter = GetComponent<BowShooter2D>();
         _skills = GetComponents<SkillBase2D>();
+        _facing = GetComponent<Facing2D>(); 
+    }
+
+    private void MoveTowards(Vector2 dest)
+    {
+        Vector2 dir = (dest - (Vector2)transform.position).normalized;
+        _rb.linearVelocity = dir * moveSpeed;
+
+        if (_facing) _facing.FaceByVelocityX(dir.x);
+    }
+
+    private void FaceTargetX()
+    {
+        if (!_facing || !target) return;
+        _facing.Face(target.position.x < transform.position.x ? -1 : 1);
     }
 
 
@@ -50,66 +63,40 @@ public class BotController2D : MonoBehaviour
         }
         StartCoroutine(StateLoop());
     }
-
-
     private IEnumerator StateLoop()
     {
         while (true)
         {
-            // MOVE
+            // MOVE phase
             _state = BotState.Move;
             float endTime = Time.time + moveDuration;
             Vector2 moveTarget = (Vector2)transform.position + Random.insideUnitCircle.normalized * moveRadius;
             while (Time.time < endTime)
             {
                 MoveTowards(moveTarget);
-                AimAtTarget();
+                FaceTargetX();
                 yield return null;
             }
             _rb.linearVelocity = Vector2.zero;
 
 
-            // ATTACK
-            _state = BotState.Attack;
-            endTime = Time.time + attackDuration;
-            while (Time.time < endTime)
-            {
-                AimAtTarget(true);
-                _shooter.Fire(transform.right, gameObject.tag);
-                yield return null;
-            }
+            // brief PAUSE before a skill (AutoAttackController2D will keep auto-shooting between skills)
+            _state = BotState.Pause;
+            FaceTargetX();
+            yield return new WaitForSeconds(pauseBeforeSkill);
 
 
-            // SKILL
+            // SKILL phase (pick first ready)
             _state = BotState.Skill;
-            _rb.linearVelocity = Vector2.zero;
-            AimAtTarget();
-            yield return new WaitForSeconds(skillPause);
-            TryRandomSkill();
+            TryRandomReadySkill();
 
 
-            // small beat
+            // short beat to avoid too frequent skill spam
             yield return new WaitForSeconds(0.25f);
         }
     }
-    private void MoveTowards(Vector2 dest)
-    {
-        Vector2 dir = (dest - (Vector2)transform.position).normalized;
-        _rb.linearVelocity = dir * moveSpeed;
-    }
 
-
-    private void AimAtTarget(bool jitter = false)
-    {
-        if (!target) return;
-        Vector2 dir = (Vector2)target.position - (Vector2)transform.position;
-        if (jitter) dir = Quaternion.Euler(0, 0, Random.Range(-aimJitterDegrees, aimJitterDegrees)) * dir;
-        float ang = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, ang);
-    }
-
-
-    private void TryRandomSkill()
+    private void TryRandomReadySkill()
     {
         if (_skills == null || _skills.Length == 0) return;
         int start = Random.Range(0, _skills.Length);

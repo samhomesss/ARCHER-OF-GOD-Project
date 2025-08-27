@@ -27,17 +27,10 @@ public class SkillDash2D : SkillBase2D
         if (_dashing) return false;
         Vector2 moveDir = GetPreferredDirection();
         if (moveDir.sqrMagnitude < 0.0001f) moveDir = transform.right;
+        BeginCast();
         StartCoroutine(DashRoutine(moveDir.normalized));
         return true;
     }
-
-
-    private Vector2 GetPreferredDirection()
-    {
-        // Prefer current look direction
-        return transform.right;
-    }
-
 
     private IEnumerator DashRoutine(Vector2 dir)
     {
@@ -48,7 +41,7 @@ public class SkillDash2D : SkillBase2D
 
 
         if (invulnerableDuringDash)
-            gameObject.layer = LayerMask.NameToLayer("Ignore Raycast"); // simple invuln trick if unused layer
+            gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 
 
         while (t < dashDuration)
@@ -62,5 +55,13 @@ public class SkillDash2D : SkillBase2D
         _rb.linearVelocity = Vector2.zero;
         gameObject.layer = originalLayer;
         _dashing = false;
+        EndCast();
+    }
+
+
+    private Vector2 GetPreferredDirection()
+    {
+        // Prefer current look direction
+        return transform.right;
     }
 }
