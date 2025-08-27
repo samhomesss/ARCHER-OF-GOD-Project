@@ -171,4 +171,6 @@ MonoBehaviour:
   lifetime: 3
   pierce: 0
   pierceCount: 1
+  gravityScale: 1
+  arcHeight: 12
   ownerTag: 

@@ -9,13 +9,9 @@ public class AutoAttackController2D : MonoBehaviour
     [Header("Attack Timing")]
     [SerializeField] private float interval = 0.5f;
 
-    [Header("Ballistic Settings")]
+    [Header("Projectile Settings")]
     [SerializeField] private Projectile2D projectilePrefab;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float gravityScale = 1.5f;
-    [SerializeField] private float minFlightTime = 0.4f;
-    [SerializeField] private float maxFlightTime = 1.1f;
-    [SerializeField] private float preferHorizSpeed = 10f;
     [SerializeField] private float targetHeightOffset = 2f;
 
     private float _nextTime;
@@ -48,7 +44,7 @@ public class AutoAttackController2D : MonoBehaviour
         if (!target || !projectilePrefab || !firePoint) return;
         if (_rb && Mathf.Abs(_rb.linearVelocity.x) > 0.01f) return;
 
-        ShootBallistic(target.position);
+        Shoot(target.position);
         _nextTime = Time.time + interval;
     }
 
@@ -64,22 +60,12 @@ public class AutoAttackController2D : MonoBehaviour
 
     public Transform Target => target;
 
-    private void ShootBallistic(Vector2 targetPos)
+    private void Shoot(Vector2 targetPos)
     {
         targetPos += Vector2.up * targetHeightOffset;
-        Vector2 p0 = firePoint.position;
-        Vector2 delta = targetPos - p0;
-        float g = Mathf.Abs(Physics2D.gravity.y) * gravityScale;
-        float distX = Mathf.Max(0.01f, Mathf.Abs(delta.x));
-
-        float t = Mathf.Clamp(distX / Mathf.Max(0.01f, preferHorizSpeed), minFlightTime, maxFlightTime);
-        float vx = delta.x / t;
-        float vy = (delta.y + 0.5f * g * t * t) / t;
-        float jumpPower = (vy * vy) / (2f * g);
-
-        if (_facing) _facing.FaceByVelocityX(vx);
-
-        var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
-        proj.FireArc(targetPos, t, jumpPower, gameObject.tag);
+        Vector2 dir = targetPos - (Vector2)firePoint.position;
+        if (_facing) _facing.FaceByVelocityX(dir.x);
+        var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        proj.Fire(dir, gameObject.tag);
     }
 }

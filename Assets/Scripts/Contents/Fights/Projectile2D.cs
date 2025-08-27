@@ -11,6 +11,8 @@ public class Projectile2D : MonoBehaviour
     [SerializeField] private bool pierce = false;
     [SerializeField] private int pierceCount = 1;
     [SerializeField] private float gravityScale = 1f;
+    [SerializeField] private float arcHeight = 2f;
+
 
     [Header("Owner Control")]
     [SerializeField] private string ownerTag; // set by spawner
@@ -32,6 +34,9 @@ public class Projectile2D : MonoBehaviour
         ownerTag = owner;
         _rb.gravityScale = gravityScale;
         _rb.linearVelocity = dir.normalized * speed;
+        Vector2 velocity = dir.normalized * speed;
+        velocity.y += arcHeight;
+        _rb.linearVelocity = velocity;
         _timer = 0f;
     }
     public void FireWithVelocity(Vector2 initialVelocity, string owner)
