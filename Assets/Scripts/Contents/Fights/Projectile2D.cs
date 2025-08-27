@@ -10,7 +10,7 @@ public class Projectile2D : MonoBehaviour
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private bool pierce = false;
     [SerializeField] private int pierceCount = 1;
-
+    [SerializeField] private float gravityScale = 1f;
 
     [Header("Owner Control")]
     [SerializeField] private string ownerTag; // set by spawner
@@ -23,6 +23,7 @@ public class Projectile2D : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _rb.gravityScale = gravityScale;
     }
 
 
@@ -34,21 +35,29 @@ public class Projectile2D : MonoBehaviour
     }
     public void FireWithVelocity(Vector2 initialVelocity, string owner)
     {
-        ownerTag = owner;        
+        ownerTag = owner;
         _rb.linearVelocity = initialVelocity;
-        _timer = 0f;             
+        _timer = 0f;
     }
+
 
 
     void Update()
     {
         _timer += Time.deltaTime;
+        if (_rb.linearVelocity.sqrMagnitude > 0.001f)
+            transform.right = _rb.linearVelocity.normalized;
         if (_timer >= lifetime) Destroy(gameObject);
+
+        if (_rb && _rb.linearVelocity.sqrMagnitude > 0.01f)
+            transform.right = _rb.linearVelocity.normalized;
     }
 
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.GetComponent<Projectile2D>() != null)
+            return; // ignore other projectiles
         if (other.attachedRigidbody && other.attachedRigidbody.gameObject.CompareTag(ownerTag))
             return; // ignore hitting owner
 
