@@ -21,6 +21,8 @@ public class SkillVolley2D : SkillBase2D
         if (shooter == null) return false;
         if (!IsReady) return false;
 
+        Debug.Log("¹º°¡ ÇÏ´ÂÁß");
+
         BeginCast();
         StartCoroutine(VolleyRoutine());
         return true;

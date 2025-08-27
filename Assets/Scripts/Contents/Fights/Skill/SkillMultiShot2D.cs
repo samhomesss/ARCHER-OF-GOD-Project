@@ -17,7 +17,7 @@ public class SkillMultiShot2D : SkillBase2D
     {
         if (shooter == null) shooter = GetComponent<BowShooter2D>();
         if (shooter == null || !shooter.CanFire) return false;
-
+        Debug.Log("멀티샷 하는중");
         BeginCast();
 
         Vector2 forward = _facing ? _facing.Forward : (Vector2)transform.right;

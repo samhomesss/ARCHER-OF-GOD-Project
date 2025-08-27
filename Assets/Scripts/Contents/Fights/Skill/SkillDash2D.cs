@@ -25,7 +25,8 @@ public class SkillDash2D : SkillBase2D
     protected override bool Cast()
     {
         if (_dashing) return false;
-        Vector2 moveDir = GetPreferredDirection();
+        Debug.Log("대쉬 하는중");
+;       Vector2 moveDir = GetPreferredDirection();
         if (moveDir.sqrMagnitude < 0.0001f) moveDir = transform.right;
         BeginCast();
         StartCoroutine(DashRoutine(moveDir.normalized));
