@@ -14,12 +14,13 @@ public class SkillDash2D : SkillBase2D
     private Health2D _health;
     private bool _dashing;
     private Tween _dashTween;
-
+    private Facing2D _facing;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _health = GetComponent<Health2D>();
+        _facing = GetComponent<Facing2D>();
     }
 
 
@@ -58,6 +59,6 @@ public class SkillDash2D : SkillBase2D
     private Vector2 GetPreferredDirection()
     {
         // Prefer current look direction
-        return transform.right;
+        return _facing ? -_facing.Forward : -(Vector2)transform.right;
     }
 }
