@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 518067070824617269}
   - component: {fileID: 9152132373769379264}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: EnemyArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.8061063, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0.0034427643, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

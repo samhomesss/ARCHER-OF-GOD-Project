@@ -33,6 +33,8 @@ public class Projectile2D : MonoBehaviour
     private float _timer;
     private Tween _moveTween;
 
+    public float Speed => speed;
+    public float ArcHeight => arcHeight;
 
     void Awake()
     {

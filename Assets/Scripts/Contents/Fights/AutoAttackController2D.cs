@@ -66,6 +66,8 @@ public class AutoAttackController2D : MonoBehaviour
         Vector2 dir = targetPos - (Vector2)firePoint.position;
         if (_facing) _facing.FaceByVelocityX(dir.x);
         var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        proj.Fire(dir, gameObject.tag);
+        float distance = dir.magnitude;
+        float flightTime = distance / projectilePrefab.Speed;
+        proj.FireArc(targetPos, flightTime, projectilePrefab.ArcHeight, gameObject.tag);
     }
 }
