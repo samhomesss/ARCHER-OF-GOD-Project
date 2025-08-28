@@ -20,6 +20,9 @@ public class EnemyController2D : MonoBehaviour
     [SerializeField] private Transform leftLimit;
     [SerializeField] private Transform rightLimit;
 
+    public Transform LeftLimit => leftLimit;
+    public Transform RightLimit => rightLimit;
+
 
     [Header("Rhythm")]
     [SerializeField] private float pauseBeforeSkill = 0.35f;

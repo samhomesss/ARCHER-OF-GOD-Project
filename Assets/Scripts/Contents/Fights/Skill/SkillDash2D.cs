@@ -15,12 +15,15 @@ public class SkillDash2D : SkillBase2D
     private bool _dashing;
     private Tween _dashTween;
     private Facing2D _facing;
+    private EnemyController2D _controller;
+
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _health = GetComponent<Health2D>();
         _facing = GetComponent<Facing2D>();
+        _controller = GetComponent<EnemyController2D>();
     }
 
 
@@ -28,21 +31,41 @@ public class SkillDash2D : SkillBase2D
     {
         if (_dashing) return false;
         Debug.Log("대쉬 하는중");
+
+        Vector2 dir = GetPreferredDirection();
+        float distance = dashDistance;
+
+        if (_controller && _controller.LeftLimit && _controller.RightLimit)
+        {
+            float distLeft = Mathf.Abs(_rb.position.x - _controller.LeftLimit.position.x);
+            float distRight = Mathf.Abs(_rb.position.x - _controller.RightLimit.position.x);
+            Transform farther = distLeft > distRight ? _controller.LeftLimit : _controller.RightLimit;
+
+            dir = new Vector2(farther.position.x - _rb.position.x, 0f).normalized;
+            float available = Mathf.Max(0f, Mathf.Abs(farther.position.x - _rb.position.x) - 0.2f);
+            distance = Mathf.Min(dashDistance, available);
+        }
+        else if (dir.sqrMagnitude < 0.0001f)
+        {
+            dir = transform.right;
+        }
+
         Vector2 moveDir = GetPreferredDirection();
         if (moveDir.sqrMagnitude < 0.0001f) moveDir = transform.right;
         BeginCast();
-        PerformDash(moveDir.normalized);
+        //PerformDash(moveDir.normalized);
+        PerformDash(dir, distance);
         return true;
     }
 
-    private void PerformDash(Vector2 dir)
+    private void PerformDash(Vector2 dir, float distance)
     {
         _dashing = true;
         var originalLayer = gameObject.layer;
         if (invulnerableDuringDash)
             gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 
-        Vector2 target = _rb.position + dir * dashDistance;
+        Vector2 target = _rb.position + dir * distance;
         _dashTween?.Kill();
         _dashTween = _rb.DOMove(target, dashDuration)
                         .SetEase(Ease.Linear)

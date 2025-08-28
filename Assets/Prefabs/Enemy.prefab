@@ -747,11 +747,11 @@ GameObject:
   - component: {fileID: 7221247368821556988}
   - component: {fileID: 4198052821724255231}
   - component: {fileID: 5758275878899207360}
-  - component: {fileID: 1243350948372566117}
   - component: {fileID: 1946989520616545739}
   - component: {fileID: 6787823933278008636}
-  - component: {fileID: 6313441012508879259}
   - component: {fileID: 6558032614795527779}
+  - component: {fileID: 1243350948372566117}
+  - component: {fileID: 6313441012508879259}
   - component: {fileID: 8592272594506348715}
   - component: {fileID: 6953743639742541464}
   - component: {fileID: 2186140577351908289}
@@ -865,26 +865,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.83518445}
   m_Size: {x: 0.5, y: 1.7185385}
   m_Direction: 0
---- !u!114 &1243350948372566117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8740936106035494741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cd9dd8128f2144fa629cadc5b919f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  destroyOnDeath: 1
-  onDamaged:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1946989520616545739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,22 +899,6 @@ MonoBehaviour:
   shooter: {fileID: 6313441012508879259}
   arrowCount: 3
   spreadDegrees: 20
---- !u!114 &6313441012508879259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8740936106035494741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d735b2cbad781348a91dc6546126dfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 7086993315476821050}
-  projectilePrefab: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
-  fireCooldown: 0.25
-  recoilKick: 0
 --- !u!114 &6558032614795527779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,6 +918,42 @@ MonoBehaviour:
   arrowsPerWave: 6
   waveInterval: 0.15
   coneDegrees: 45
+--- !u!114 &1243350948372566117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38cd9dd8128f2144fa629cadc5b919f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  destroyOnDeath: 1
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6313441012508879259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d735b2cbad781348a91dc6546126dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 7086993315476821050}
+  projectilePrefab: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
+  fireCooldown: 0.25
+  recoilKick: 0
 --- !u!114 &8592272594506348715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,10 +988,6 @@ MonoBehaviour:
   interval: 0.5
   projectilePrefab: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
   firePoint: {fileID: 7086993315476821050}
-  gravityScale: 1.5
-  minFlightTime: 0.4
-  maxFlightTime: 1.1
-  preferHorizSpeed: 10
   targetHeightOffset: 1
 --- !u!114 &2186140577351908289
 MonoBehaviour:
@@ -1026,3 +1022,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
+  spriteFacesLeft: 1

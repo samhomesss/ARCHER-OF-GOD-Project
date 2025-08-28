@@ -35,7 +35,7 @@ public class Health2D : MonoBehaviour, IDamageable2D
         if (CurrentHealth <= 0) return;
         CurrentHealth -= amount;
         onDamaged?.Invoke();
-        // 여기에 UI 감소 되는 부분 추가 
+        // TODO: 여기에 UI 감소 되는 부분 추가 
 
         if (CurrentHealth <= 0)
         {

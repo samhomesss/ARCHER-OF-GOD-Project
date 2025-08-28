@@ -1568,6 +1568,79 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1243294117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8740936106035494741, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+  m_PrefabInstance: {fileID: 509090526772573775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1243294131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243294117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187b2f11721716148a6ddd6278e5f1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  skillName: Skill
+  firePoint: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  upwardSpeed: 20
+  upwardGravityScale: 1.5
+  preDelay: 0.12
+  drops: 8
+  startHeight: 6
+  dropSpeed: 18
+  dropGravityScale: 1.5
+  interval: 0.055
+  xJitter: 0
+--- !u!114 &1243294132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243294117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d8ffe169267724397b2970d56a13ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  skillName: Skill
+  firePoint: {fileID: 0}
+  piercingProjectilePrefab: {fileID: 0}
+  lineSpeed: 28
+  shots: 1
+  interval: 0.06
+  targetHeightOffset: 0
+--- !u!114 &1243294133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243294117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f4a7b8473fd334e86049465c489551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  skillName: Skill
+  jumpHeight: 2
+  jumpUpTime: 0.12
+  jumpDownTime: 0.14
+  firePoint: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  shots: 3
+  shotInterval: 0.07
+  straightSpeed: 22
+  targetHeightOffset: 0
 --- !u!1 &1357935691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,7 +2457,7 @@ Transform:
   m_GameObject: {fileID: 2065417888}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.027, y: 0.61, z: 0}
+  m_LocalPosition: {x: -0.167, y: 0.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2544,6 +2617,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3893994498311097885, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893994498311097885, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15
       objectReference: {fileID: 0}
@@ -2585,7 +2662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6526006056251416323, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: spriteFacesLeft
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6953743639742541464, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: targetHeightOffset
@@ -2618,7 +2695,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8740936106035494741, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 1243294133}
+    - targetCorrespondingSourceObject: {fileID: 8740936106035494741, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      insertIndex: 8
+      addedObject: {fileID: 1243294132}
+    - targetCorrespondingSourceObject: {fileID: 8740936106035494741, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      insertIndex: 9
+      addedObject: {fileID: 1243294131}
   m_SourcePrefab: {fileID: 100100000, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
 --- !u!1001 &2110275006063908791
 PrefabInstance:
@@ -2674,7 +2760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823259464549928168, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: xJitter
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1823259464549928168, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: interval
@@ -2703,6 +2789,10 @@ PrefabInstance:
     - target: {fileID: 8195108968170372752, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650971851136463656, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: targetHeightOffset
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
