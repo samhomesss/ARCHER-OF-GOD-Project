@@ -42,9 +42,9 @@ public class EnemyAutoAttack2D : MonoBehaviour
         Vector2 p0 = firePoint.position;
         Vector2 p1 = target.position;
         Vector2 delta = p1 - p0;
+
         float g = Mathf.Abs(Physics2D.gravity.y) * gravityScale;
         float dist = Mathf.Max(0.01f, Mathf.Abs(delta.x));
-
         float t = Mathf.Clamp(dist / Mathf.Max(0.01f, preferHorizSpeed), minFlightTime, maxFlightTime);
 
         float vx = delta.x / t;
@@ -54,11 +54,10 @@ public class EnemyAutoAttack2D : MonoBehaviour
         var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
         proj.FireArc(p1, t, jumpPower, gameObject.tag);
 
-        // face shot direction using rotation (0 right, 180 left)
-        if (vx != 0f)
+        // 발사 직전 정면 강제: 수평 속도 부호에 따라 좌/우 스케일 플립
+        if (Mathf.Abs(vx) > 0.01f && TryGetComponent(out Facing2D facing))
         {
-            float z = (vx < 0f) ? 180f : 0f;
-            transform.rotation = Quaternion.Euler(0f, 0f, z);
+            facing.FaceByVelocityX(-vx); // 반대로 보이게 하려면 -vx
         }
     }
 }
