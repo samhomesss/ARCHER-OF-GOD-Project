@@ -13,6 +13,8 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private KeyCode skill1Key = KeyCode.Q;
     [SerializeField] private KeyCode skill2Key = KeyCode.E;
     [SerializeField] private KeyCode skill3Key = KeyCode.R;
+    [SerializeField] private KeyCode skill4Key = KeyCode.T;
+    [SerializeField] private KeyCode skill5Key = KeyCode.F;
 
 
     private Rigidbody2D _rb;
@@ -71,6 +73,8 @@ public class PlayerController2D : MonoBehaviour
         if (Input.GetKeyDown(skill1Key)) TrySkillIndex(0);
         if (Input.GetKeyDown(skill2Key)) TrySkillIndex(1);
         if (Input.GetKeyDown(skill3Key)) TrySkillIndex(2);
+        if (Input.GetKeyDown(skill3Key)) TrySkillIndex(3);
+        if (Input.GetKeyDown(skill3Key)) TrySkillIndex(4);
     }
 
 

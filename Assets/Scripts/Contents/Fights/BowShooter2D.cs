@@ -28,7 +28,7 @@ public class BowShooter2D : MonoBehaviour
 
 
         var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        proj.transform.right = direction.normalized;
+        // DO NOT pre-rotate here; projectile will align itself by velocity
         proj.Fire(direction, ownerTag);
 
 
