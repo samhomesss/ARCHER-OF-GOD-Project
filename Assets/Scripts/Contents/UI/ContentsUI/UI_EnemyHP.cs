@@ -1,16 +1,6 @@
 using UnityEngine;
 
-public class UI_EnemyHP : MonoBehaviour
+public class UI_EnemyHP : UI_Scene
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

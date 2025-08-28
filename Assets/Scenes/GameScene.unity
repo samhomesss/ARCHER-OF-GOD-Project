@@ -946,6 +946,7 @@ GameObject:
   - component: {fileID: 747244447}
   - component: {fileID: 747244446}
   - component: {fileID: 747244445}
+  - component: {fileID: 747244448}
   m_Layer: 5
   m_Name: UI_PlayerMove
   m_TagString: Untagged
@@ -1003,11 +1004,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1037,6 +1038,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &747244448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747244443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecb7f2d025d5664baab16223f312125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &786715535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,6 +1511,7 @@ GameObject:
   - component: {fileID: 1096190517}
   - component: {fileID: 1096190516}
   - component: {fileID: 1096190515}
+  - component: {fileID: 1096190518}
   m_Layer: 5
   m_Name: UI_PlayerSkill
   m_TagString: Untagged
@@ -1558,11 +1572,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1592,6 +1606,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1096190518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096190513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9601904094f961e449446c766232534e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1170457373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1640,6 +1666,7 @@ GameObject:
   - component: {fileID: 1194599400}
   - component: {fileID: 1194599399}
   - component: {fileID: 1194599398}
+  - component: {fileID: 1194599401}
   m_Layer: 5
   m_Name: 'UI_EnemyHP '
   m_TagString: Untagged
@@ -1730,6 +1757,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1194599401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194599396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161e1de53bd0b0548a4675c0080ebeee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229927519
 GameObject:
   m_ObjectHideFlags: 0
@@ -2758,7 +2797,7 @@ GameObject:
   - component: {fileID: 1746499107}
   - component: {fileID: 1746499106}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2894,6 +2933,7 @@ GameObject:
   - component: {fileID: 1796889410}
   - component: {fileID: 1796889409}
   - component: {fileID: 1796889408}
+  - component: {fileID: 1796889411}
   m_Layer: 5
   m_Name: UI_Timer
   m_TagString: Untagged
@@ -2950,11 +2990,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -2984,6 +3024,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1796889411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796889406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582bdcf79d0d591439a09c54920e9a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1901478506
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,7 +3754,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5470650555985712990, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: jumpHeight
-      value: 4
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470650555985712990, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: jumpUpTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470650555985712990, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: jumpDownTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5470650555985712990, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: projectilePrefab

@@ -1,16 +1,26 @@
+using TMPro;
 using UnityEngine;
 
-public class UI_Timer : MonoBehaviour
+public class UI_Timer : UI_Scene
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    enum Texts
     {
-        
+        TimerText,
     }
 
-    // Update is called once per frame
-    void Update()
+    TMP_Text _timerText;
+
+    public override bool Init()
     {
-        
+        if (base.Init() == false) 
+            return false;
+
+        BindTexts(typeof(Texts));
+
+        _timerText = GetText((int)Texts.TimerText);
+
+        Debug.Log(_timerText.name);
+
+        return true;    
     }
 }

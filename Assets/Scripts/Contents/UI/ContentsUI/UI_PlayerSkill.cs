@@ -1,16 +1,23 @@
 using UnityEngine;
 
-public class UI_PlayerSkill : MonoBehaviour
+public class UI_PlayerSkill : UI_Scene
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    enum Buttons
     {
-        
+        SkillCardImage1,
+        SkillCardImage2,
+        SkillCardImage3,
+        SkillCardImage4,
+        SkillCardImage5,
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool Init()
     {
-        
+        if (base.Init() == false)
+            return false;
+
+        BindButtons(typeof(Buttons));
+
+        return true;
     }
 }

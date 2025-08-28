@@ -9,7 +9,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float moveSpeed = 6f;
 
 
-    [Header("Input Keys")]
+    [Header("Input Keys")] // TODO : 해당 부분 이제 키보드가 아닌 모바일 버전으로 터치로 바꿔야 함 
     [SerializeField] private KeyCode skill1Key = KeyCode.Q;
     [SerializeField] private KeyCode skill2Key = KeyCode.E;
     [SerializeField] private KeyCode skill3Key = KeyCode.R;
