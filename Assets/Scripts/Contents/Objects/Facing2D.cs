@@ -4,22 +4,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Facing2D : MonoBehaviour
 {
-    [Tooltip("Flip only this transform. If empty, flips self.")]
     [SerializeField] private Transform visual;
-
-
-    [Header("Authoring")]
-    [Tooltip("Check if the sprite looks LEFT in its original art (true = faces left).")]
     [SerializeField] private bool spriteFacesLeft = true;
 
 
-    /// <summary> +1 = world right, -1 = world left (logical facing) </summary>
     public int Sign { get; private set; } = 1;
 
-
     Vector3 _baseScale;
-    int _authorBase; // +1: art faces right, -1: art faces left
-
+    int _authorBase; 
 
     void Awake()
     {
@@ -28,7 +20,6 @@ public class Facing2D : MonoBehaviour
         if (Mathf.Approximately(Mathf.Abs(_baseScale.x), 0f)) _baseScale.x = 1f;
         _authorBase = spriteFacesLeft ? -1 : 1;
     }
-
 
     public void FaceByInput(float h)
     {

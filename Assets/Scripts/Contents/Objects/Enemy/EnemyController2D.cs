@@ -11,7 +11,7 @@ public class EnemyController2D : MonoBehaviour
 
 
     [Header("Refs")]
-    [SerializeField] private Transform target; // Player
+    [SerializeField] private Transform target; 
 
 
     [Header("Movement")]
@@ -50,7 +50,6 @@ public class EnemyController2D : MonoBehaviour
         float minX = leftLimit ? leftLimit.position.x : float.NegativeInfinity;
         float maxX = rightLimit ? rightLimit.position.x : float.PositiveInfinity;
 
-        // If enemy goes out of bounds, snap it back to the closest limit
         float currentX = transform.position.x;
         if (currentX < minX || currentX > maxX)
         {
@@ -72,14 +71,12 @@ public class EnemyController2D : MonoBehaviour
 
         _rb.linearVelocity = new Vector2(dir.x * moveSpeed, 0f);
 
-        //if (_facing) _facing.FaceByVelocityX(-dir.x);
         if (_facing) _facing.FaceByVelocityX(dir.x);
     }
 
     private void FaceTargetX()
     {
         if (!_facing || !target) return;
-        //_facing.Face(target.position.x < transform.position.x ? +1 : -1);
         _facing.Face(target.position.x < transform.position.x ? -1 : 1);
     }
 
@@ -97,7 +94,6 @@ public class EnemyController2D : MonoBehaviour
     {
         while (true)
         {
-            // MOVE phase
             _state = BotState.Move;
             float dir = Random.value < 0.5f ? -1f : 1f;
             float targetX = transform.position.x + dir * moveDistance;
@@ -107,6 +103,7 @@ public class EnemyController2D : MonoBehaviour
                 float maxX = Mathf.Max(leftLimit.position.x, rightLimit.position.x);
                 targetX = Mathf.Clamp(targetX, minX, maxX);
             }
+
             Vector2 moveTarget = new Vector2(targetX, transform.position.y);
             while (Mathf.Abs(transform.position.x - moveTarget.x) > 0.05f)
             {
@@ -116,19 +113,16 @@ public class EnemyController2D : MonoBehaviour
             _rb.linearVelocity = Vector2.zero;
 
 
-            // brief PAUSE before a skill (AutoAttackController2D will keep auto-shooting between skills)
             _state = BotState.Pause;
             FaceTargetX();
             yield return new WaitForSeconds(pauseBeforeSkill);
 
 
-            // SKILL phase (attack once after moving)
             _state = BotState.Skill;
             if (_autoAttack)
                 _autoAttack.Fire();
             TryRandomReadySkill();
 
-            // short beat to avoid too frequent skill spam
             yield return new WaitForSeconds(0.25f);
         }
     }

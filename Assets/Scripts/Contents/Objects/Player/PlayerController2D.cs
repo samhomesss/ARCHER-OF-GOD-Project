@@ -35,7 +35,6 @@ public class PlayerController2D : MonoBehaviour
 
     void Update()
     {
-        // 마우스 에임 완전 제거
         HandleSkills();
     }
 
