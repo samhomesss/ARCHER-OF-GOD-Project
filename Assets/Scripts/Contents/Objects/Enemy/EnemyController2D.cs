@@ -59,13 +59,15 @@ public class EnemyController2D : MonoBehaviour
 
         _rb.linearVelocity = new Vector2(dir.x * moveSpeed, 0f);
 
-        if (_facing) _facing.FaceByVelocityX(-dir.x);
+        //if (_facing) _facing.FaceByVelocityX(-dir.x);
+        if (_facing) _facing.FaceByVelocityX(dir.x);
     }
 
     private void FaceTargetX()
     {
         if (!_facing || !target) return;
-        _facing.Face(target.position.x < transform.position.x ? +1 : -1);
+        //_facing.Face(target.position.x < transform.position.x ? +1 : -1);
+        _facing.Face(target.position.x < transform.position.x ? -1 : 1);
     }
 
 

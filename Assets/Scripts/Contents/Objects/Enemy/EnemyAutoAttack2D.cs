@@ -57,7 +57,7 @@ public class EnemyAutoAttack2D : MonoBehaviour
         // 발사 직전 정면 강제: 수평 속도 부호에 따라 좌/우 스케일 플립
         if (Mathf.Abs(vx) > 0.01f && TryGetComponent(out Facing2D facing))
         {
-            facing.FaceByVelocityX(-vx); // 반대로 보이게 하려면 -vx
+            facing.FaceByVelocityX(vx); // 반대로 보이게 하려면 -vx
         }
     }
 }
