@@ -30,7 +30,6 @@ public class SkillVolley2D : SkillBase2D
 
     private System.Collections.IEnumerator VolleyRoutine()
     {
-        // ★ 스케일 플립 기반 전방
         Vector2 forward = _facing ? _facing.Forward : (Vector2)transform.right;
 
         for (int w = 0; w < waves; w++)

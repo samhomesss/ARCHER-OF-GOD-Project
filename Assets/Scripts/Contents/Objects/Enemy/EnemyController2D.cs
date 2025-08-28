@@ -49,12 +49,22 @@ public class EnemyController2D : MonoBehaviour
     {
         float minX = leftLimit ? leftLimit.position.x : float.NegativeInfinity;
         float maxX = rightLimit ? rightLimit.position.x : float.PositiveInfinity;
+
+        // If enemy goes out of bounds, snap it back to the closest limit
+        float currentX = transform.position.x;
+        if (currentX < minX || currentX > maxX)
+        {
+            float nearestX = Mathf.Abs(currentX - minX) < Mathf.Abs(currentX - maxX) ? minX : maxX;
+            _rb.position = new Vector2(nearestX, _rb.position.y);
+            currentX = nearestX;
+        }
+
         dest.x = Mathf.Clamp(dest.x, minX, maxX);
 
-        Vector2 dir = new Vector2(dest.x - transform.position.x, 0f).normalized;
+        Vector2 dir = new Vector2(dest.x - currentX, 0f).normalized;
 
-        if ((dir.x < 0f && transform.position.x <= minX) ||
-            (dir.x > 0f && transform.position.x >= maxX))
+        if ((dir.x < 0f && currentX <= minX) ||
+            (dir.x > 0f && currentX >= maxX))
         {
             _rb.linearVelocity = Vector2.zero;
             return;

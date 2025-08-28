@@ -750,6 +750,9 @@ GameObject:
   - component: {fileID: 1946989520616545739}
   - component: {fileID: 6787823933278008636}
   - component: {fileID: 6558032614795527779}
+  - component: {fileID: 2263297142965493290}
+  - component: {fileID: 2017456160389605545}
+  - component: {fileID: 289713743989843897}
   - component: {fileID: 1243350948372566117}
   - component: {fileID: 6313441012508879259}
   - component: {fileID: 8592272594506348715}
@@ -918,6 +921,74 @@ MonoBehaviour:
   arrowsPerWave: 6
   waveInterval: 0.15
   coneDegrees: 45
+--- !u!114 &2263297142965493290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f4a7b8473fd334e86049465c489551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  skillName: Skill
+  jumpHeight: 2
+  jumpUpTime: 0.12
+  jumpDownTime: 0.14
+  firePoint: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  shots: 3
+  shotInterval: 0.07
+  straightSpeed: 22
+  targetHeightOffset: 0
+--- !u!114 &2017456160389605545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d8ffe169267724397b2970d56a13ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  skillName: Skill
+  firePoint: {fileID: 0}
+  piercingProjectilePrefab: {fileID: 0}
+  lineSpeed: 28
+  shots: 1
+  interval: 0.06
+  targetHeightOffset: 0
+--- !u!114 &289713743989843897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187b2f11721716148a6ddd6278e5f1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  skillName: Skill
+  firePoint: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  upwardSpeed: 20
+  upwardGravityScale: 1.5
+  preDelay: 0.12
+  drops: 8
+  startHeight: 6
+  dropSpeed: 18
+  dropGravityScale: 1.5
+  interval: 0.055
+  xJitter: 0
 --- !u!114 &1243350948372566117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,7 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 10
   moveDistance: 3
   leftLimit: {fileID: 0}
   rightLimit: {fileID: 0}
@@ -1002,7 +1073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  interval: 0.6
+  interval: 1
   projectilePrefab: {fileID: 0}
   firePoint: {fileID: 0}
   gravityScale: 1.5

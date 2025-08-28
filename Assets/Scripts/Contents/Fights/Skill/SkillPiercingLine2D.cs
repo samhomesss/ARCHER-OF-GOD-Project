@@ -30,7 +30,7 @@ public class SkillPiercingLine2D : SkillBase2D
     protected override bool Cast()
     {
         if (!piercingProjectilePrefab || !_target || !firePoint) return false;
-
+        Debug.Log("관통샷하는 중");
         BeginCast();
         StartCoroutine(FireRoutine());
         return true;

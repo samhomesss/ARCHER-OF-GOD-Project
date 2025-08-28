@@ -73,8 +73,8 @@ public class PlayerController2D : MonoBehaviour
         if (Input.GetKeyDown(skill1Key)) TrySkillIndex(0);
         if (Input.GetKeyDown(skill2Key)) TrySkillIndex(1);
         if (Input.GetKeyDown(skill3Key)) TrySkillIndex(2);
-        if (Input.GetKeyDown(skill3Key)) TrySkillIndex(3);
-        if (Input.GetKeyDown(skill3Key)) TrySkillIndex(4);
+        if (Input.GetKeyDown(skill4Key)) TrySkillIndex(3);
+        if (Input.GetKeyDown(skill5Key)) TrySkillIndex(4);
     }
 
 
