@@ -13,6 +13,18 @@ public class DamageUpItem : MonoBehaviour
             if (shooter != null)
             {
                 shooter.ApplyDamageMultiplier(multiplier, duration);
+                if (other.CompareTag("Player"))
+                {
+                    var ui = FindObjectOfType<UI_PlayerDamageUp>();
+                    if (ui != null)
+                        ui.StartCoolTimer(duration);
+                }
+                else if (other.CompareTag("Enemy"))
+                {
+                    var ui = FindObjectOfType<UI_EnemyDamageUp>();
+                    if (ui != null)
+                        ui.StartCoolTimer(duration);
+                }
             }
 
             Destroy(gameObject);
