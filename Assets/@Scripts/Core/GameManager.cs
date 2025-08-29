@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance => _instance;
@@ -14,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     private Animator playerAnim;
     private Animator enemyAnim;
+    private bool resultShown;
 
     public event Action<int> OnPlayerDamagedEvent;
     public event Action<int> OnEnemyDamagedEvent;
@@ -46,11 +46,19 @@ public class GameManager : MonoBehaviour
 
         if (playerHealth) playerHealth.onDeath.AddListener(() =>
         {
+            if (resultShown)
+                return;
+
+            resultShown = true;
             if (enemyAnim) enemyAnim.Play("victory");
             loseResultCanvas.GetComponent<Canvas>().enabled = true;
         });
         if (botHealth) botHealth.onDeath.AddListener(() =>
         {
+            if (resultShown)
+                return;
+
+            resultShown = true;
             if (playerAnim) playerAnim.Play("victory");
             winResultCanvas.GetComponent<Canvas>().enabled = true;
 
