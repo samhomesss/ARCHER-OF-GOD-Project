@@ -25,7 +25,13 @@ public class SkillStun2D : SkillBase2D
 
         BeginCast();
         Vector2 forward = _facing ? _facing.Forward : (Vector2)transform.right;
-        shooter.Fire(-forward, gameObject.tag, projectilePrefab, stunDuration);
+
+        if (CompareTag("Player"))
+        {
+            forward = -forward;
+        }
+
+        shooter.Fire(forward, gameObject.tag, projectilePrefab, stunDuration);
         EndCast();
         return true;
     }
