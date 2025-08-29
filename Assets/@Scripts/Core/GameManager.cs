@@ -10,8 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Health2D playerHealth;
     [SerializeField] private Health2D botHealth;
 
-    private event Action<int> OnPlayerDamagedEvent;
-    private event Action<int> OnEnemyDamagedEvent;
+    public event Action<int> OnPlayerDamagedEvent;
+    public event Action<int> OnEnemyDamagedEvent;
+
+    public Health2D PlayerHealth => playerHealth;
+    public Health2D EnemyHealth => botHealth;
 
 
     void Start()

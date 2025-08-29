@@ -8,6 +8,9 @@ public class SkillDash2D : SkillBase2D
     [SerializeField] private float dashDistance = 4f;
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private bool invulnerableDuringDash = true;
+    [SerializeField] private GameObject dashEffectPrefab;
+    [SerializeField] private float dashEffectInterval = 0.05f;
+    [SerializeField] private float dashEffectDuration = 0.3f;
 
 
     private Rigidbody2D _rb;
@@ -16,6 +19,8 @@ public class SkillDash2D : SkillBase2D
     private Tween _dashTween;
     private Facing2D _facing;
     private EnemyController2D _controller;
+    private SpriteRenderer _spriteRenderer;
+    private Coroutine _dashEffectCoroutine;
 
 
     void Awake()
@@ -24,6 +29,7 @@ public class SkillDash2D : SkillBase2D
         _health = GetComponent<Health2D>();
         _facing = GetComponent<Facing2D>();
         _controller = GetComponent<EnemyController2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
 
@@ -65,6 +71,10 @@ public class SkillDash2D : SkillBase2D
         if (invulnerableDuringDash)
             gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 
+        if (dashEffectPrefab)
+            _dashEffectCoroutine = StartCoroutine(SpawnDashEffect());
+
+
         Vector2 target = _rb.position + dir * distance;
         _dashTween?.Kill();
         _dashTween = _rb.DOMove(target, dashDuration)
@@ -83,5 +93,31 @@ public class SkillDash2D : SkillBase2D
     {
         // Prefer current look direction
         return _facing ? -_facing.Forward : -(Vector2)transform.right;
+    }
+
+    private IEnumerator SpawnDashEffect()
+    {
+        while (_dashing)
+        {
+            var effect = Instantiate(dashEffectPrefab, transform.position + Vector3.up * 1.9f, Quaternion.identity);
+            if (effect)
+            {
+                var effectSr = effect.GetComponentInChildren<SpriteRenderer>();
+                if (effectSr && _spriteRenderer)
+                {
+                    effectSr.sprite = _spriteRenderer.sprite;
+                    effectSr.flipX = _spriteRenderer.flipX;
+                    effectSr.flipY = _spriteRenderer.flipY;
+                    effect.transform.localScale = transform.localScale;
+                    effectSr.DOFade(0f, dashEffectDuration).OnComplete(() => Destroy(effect));
+                }
+                else
+                {
+                    Destroy(effect, dashEffectDuration);
+                }
+            }
+
+            yield return new WaitForSeconds(dashEffectInterval);
+        }
     }
 }

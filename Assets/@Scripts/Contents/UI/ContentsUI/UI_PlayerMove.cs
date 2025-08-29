@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UI_PlayerMove : UI_Scene
 {
@@ -27,16 +28,31 @@ public class UI_PlayerMove : UI_Scene
 
     private void Start()
     {
-        GetButton((int)Buttons.LeftArrow).onClick.AddListener(() =>
+        var leftButton = GetButton((int)Buttons.LeftArrow);
+        var rightButton = GetButton((int)Buttons.RightArrow);
+
+        UI_Base.BindEvent(leftButton.gameObject, (PointerEventData evt) =>
         {
             if (_player != null)
                 _player.SetHorizontal(-1f);
-        });
+        }, Define.EUIEvent.PointerDown);
 
-        GetButton((int)Buttons.RightArrow).onClick.AddListener(() =>
+        UI_Base.BindEvent(leftButton.gameObject, (PointerEventData evt) =>
+        {
+            if (_player != null)
+                _player.SetHorizontal(0f);
+        }, Define.EUIEvent.PointerUp);
+
+        UI_Base.BindEvent(rightButton.gameObject, (PointerEventData evt) =>
         {
             if (_player != null)
                 _player.SetHorizontal(1f);
-        });
+        }, Define.EUIEvent.PointerDown);
+
+        UI_Base.BindEvent(rightButton.gameObject, (PointerEventData evt) =>
+        {
+            if (_player != null)
+                _player.SetHorizontal(0f);
+        }, Define.EUIEvent.PointerUp);
     }
 }

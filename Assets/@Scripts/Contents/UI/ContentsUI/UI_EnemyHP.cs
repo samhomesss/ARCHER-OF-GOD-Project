@@ -9,6 +9,7 @@ public class UI_EnemyHP : UI_Scene
     }
 
     Slider _enemyHpSlider;
+    GameManager _gm;
 
     public override bool Init()
     {
@@ -25,5 +26,36 @@ public class UI_EnemyHP : UI_Scene
 
 
         return true;
+    }
+
+    private void Start()
+    {
+        _gm = GameManager.Instance;
+        if (_gm != null)
+        {
+            var hp = _gm.EnemyHealth;
+            if (hp != null)
+            {
+                _enemyHpSlider.maxValue = hp.MaxHealth;
+                _enemyHpSlider.value = hp.CurrentHealth;
+            }
+            _gm.OnEnemyDamagedEvent += OnEnemyDamaged;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_gm != null)
+            _gm.OnEnemyDamagedEvent -= OnEnemyDamaged;
+    }
+
+    void OnEnemyDamaged(int damage)
+    {
+        if (_gm != null)
+        {
+            var hp = _gm.EnemyHealth;
+            if (hp != null)
+                _enemyHpSlider.value = hp.CurrentHealth;
+        }
     }
 }
