@@ -17,7 +17,6 @@ public class UI_LoseResult : UI_Scene
 
         GetButton((int)Buttons.RestartButton).onClick.AddListener(() =>
         {
-            // Scene ¿ÁΩ√¿€
             SceneManager.LoadScene("GameScene");
         });
 

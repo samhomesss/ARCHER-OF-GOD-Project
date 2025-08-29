@@ -33,7 +33,6 @@ public class UI_PlayerSkill : UI_Scene
         BindButtons(typeof(Buttons));
         BindObjects(typeof(GameObjects));
 
-        // 처음 시작 초기화 부분 공통된 부분이 많아서 합쳐줘
         int count = System.Enum.GetValues(typeof(GameObjects)).Length;
         _skillCoolTimers = new GameObject[count];
         for (int i = 0; i < count; i++)

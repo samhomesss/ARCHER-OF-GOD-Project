@@ -60,7 +60,6 @@ public class SkillDash2D : SkillBase2D
         Vector2 moveDir = GetPreferredDirection();
         if (moveDir.sqrMagnitude < 0.0001f) moveDir = transform.right;
         BeginCast();
-        //PerformDash(moveDir.normalized);
         PerformDash(dir, distance);
         return true;
     }
@@ -92,7 +91,6 @@ public class SkillDash2D : SkillBase2D
 
     private Vector2 GetPreferredDirection()
     {
-        // Prefer current look direction
         return _facing ? -_facing.Forward : -(Vector2)transform.right;
     }
 

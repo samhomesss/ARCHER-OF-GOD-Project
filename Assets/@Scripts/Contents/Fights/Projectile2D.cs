@@ -9,7 +9,7 @@ public class Projectile2D : MonoBehaviour
     [Header("Kinetics")]
     [SerializeField] private float speed = 14f;
     [SerializeField] private float gravityScale = 1f;
-    [SerializeField] private float arcHeight = 0f; // set 0 for straight shots
+    [SerializeField] private float arcHeight = 0f; 
 
 
     [Header("Damage")]
@@ -24,13 +24,13 @@ public class Projectile2D : MonoBehaviour
     [SerializeField] private float stunDuration = 0f;
 
     [Header("Owner")]
-    [SerializeField] private string ownerTag; // set by spawner
+    [SerializeField] private string ownerTag; 
 
 
     [Header("Visual Alignment")]
-    [SerializeField] private bool alignToVelocity = true; // keep the sprite pointing along travel dir
-    [SerializeField] private float alignLerp = 20f; // higher = snappier
-    [SerializeField] private float visualAngleOffsetDeg = -90f; // sprite faces UP by default ¡æ -90¡Æ
+    [SerializeField] private bool alignToVelocity = true; 
+    [SerializeField] private float alignLerp = 20f; 
+    [SerializeField] private float visualAngleOffsetDeg = -90f; 
 
     [Header("Effects")]
     public GameObject hitEffectPrefab;
@@ -55,7 +55,7 @@ public class Projectile2D : MonoBehaviour
         ownerTag = owner;
         _rb.gravityScale = gravityScale;
         Vector2 v = dir.normalized * speed;
-        v.y += arcHeight; // keep 0 for laser-straight
+        v.y += arcHeight; 
         _rb.linearVelocity = v;
         _timer = 0f;
         AlignInstant(v);
@@ -134,7 +134,6 @@ public class Projectile2D : MonoBehaviour
             Vector2 hitNormal = (Vector2)transform.position - hitPoint;
             dmg.TakeDamage(damage, hitPoint, hitNormal, gameObject);
 
-            // Update UI for player or enemy health when hit by a projectile
             var dmgComponent = dmg as Component;
             if (dmgComponent != null)
             {

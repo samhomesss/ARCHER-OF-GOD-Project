@@ -43,7 +43,7 @@ public class Facing2D : MonoBehaviour
 
         var t = visual ? visual : transform;
         var s = t.localScale;
-        s.x = Mathf.Abs(_baseScale.x) * _authorBase * Sign; // art base ¡¿ logical facing
+        s.x = Mathf.Abs(_baseScale.x) * _authorBase * Sign; 
         s.y = _baseScale.y;
         s.z = _baseScale.z;
         t.localScale = s;

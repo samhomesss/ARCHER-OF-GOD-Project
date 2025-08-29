@@ -69,20 +69,12 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    /// <summary>
-    /// 플레이어가 공격받았을때 사용
-    /// </summary>
-    /// <param name="damage"></param>
+    
     public void PlayerDamaged(int damage)
     {
-        Debug.Log("플레이어 공격 받음");
         OnPlayerDamagedEvent?.Invoke(damage);
     }
 
-    /// <summary>
-    /// 적이 공격 받았을때 사용
-    /// </summary>
-    /// <param name="damage"></param>
     public void EnemyDamaged(int damage)
     {
         OnEnemyDamagedEvent?.Invoke(damage);

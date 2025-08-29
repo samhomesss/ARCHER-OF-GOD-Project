@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StunHandler2D : MonoBehaviour, IStunnable2D
 {
-    [SerializeField] private MonoBehaviour[] disableOnStun; // AIPath, AIDestinationSetter, Movement ��
+    [SerializeField] private MonoBehaviour[] disableOnStun; 
     [SerializeField] private Rigidbody2D rb;
 
     private float _timer;
@@ -53,7 +53,6 @@ public class StunHandler2D : MonoBehaviour, IStunnable2D
         _timer -= Time.deltaTime;
         if (_timer <= 0f)
         {
-            // ����
             if (rb)
             {
                 rb.isKinematic = _savedKinematic;

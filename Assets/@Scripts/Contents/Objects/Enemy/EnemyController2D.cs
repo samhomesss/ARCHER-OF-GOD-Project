@@ -67,11 +67,11 @@ public class EnemyController2D : MonoBehaviour
         if ((dir.x < 0f && currentX <= minX) ||
             (dir.x > 0f && currentX >= maxX))
         {
-            _rb.linearVelocity = Vector2.zero;
+            _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
             return;
         }
 
-        _rb.linearVelocity = new Vector2(dir.x * moveSpeed, 0f);
+        _rb.linearVelocity = new Vector2(dir.x * moveSpeed, _rb.linearVelocity.y);
 
         if (_facing) _facing.FaceByVelocityX(dir.x);
 
@@ -120,7 +120,9 @@ public class EnemyController2D : MonoBehaviour
                 MoveTowards(moveTarget);
                 yield return null;
             }
-            _rb.linearVelocity = Vector2.zero;
+
+            _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+
             if (_anim)
             {
                 var info = _anim.GetCurrentAnimatorStateInfo(0);

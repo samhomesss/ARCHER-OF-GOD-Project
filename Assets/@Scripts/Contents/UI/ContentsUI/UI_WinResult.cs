@@ -17,7 +17,6 @@ public class UI_WinResult : UI_Scene
 
         GetButton((int)Buttons.RestartButton).onClick.AddListener(() => 
         {
-            // Scene ¿ÁΩ√¿€
             SceneManager.LoadScene("GameScene");
         });
 

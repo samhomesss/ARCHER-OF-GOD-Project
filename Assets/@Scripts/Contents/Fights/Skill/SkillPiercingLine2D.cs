@@ -3,9 +3,9 @@ using UnityEngine;
 public class SkillPiercingLine2D : SkillBase2D
 {
     [SerializeField] private Transform firePoint;
-    [SerializeField] private Projectile2D piercingProjectilePrefab; // pierce=true 로 세팅된 프리팹
+    [SerializeField] private Projectile2D piercingProjectilePrefab; 
     [SerializeField] private float lineSpeed = 28f;
-    [SerializeField] private int shots = 1;                // 1~3 추천
+    [SerializeField] private int shots = 1;                
     [SerializeField] private float interval = 0.06f;
     [SerializeField] private float targetHeightOffset = 0f;
 
@@ -52,7 +52,7 @@ public class SkillPiercingLine2D : SkillBase2D
             var proj = Object.Instantiate(piercingProjectilePrefab, firePoint.position, Quaternion.identity);
             if (_shooter) proj.Damage *= _shooter.DamageMultiplier;
             var rb = proj.GetComponent<Rigidbody2D>();
-            if (rb) rb.gravityScale = 0f; // 포물선 X
+            if (rb) rb.gravityScale = 0f; 
             proj.FireWithVelocity(dir * lineSpeed, gameObject.tag);
 
             if (i < shots - 1)

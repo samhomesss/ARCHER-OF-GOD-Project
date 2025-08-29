@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyAutoAttack2D : MonoBehaviour
 {
     [Header("Target")]
-    [SerializeField] private Transform target; // Player
+    [SerializeField] private Transform target; 
 
     [Header("Attack Timing")]
     [SerializeField] private float interval = 0.6f;
@@ -58,10 +58,9 @@ public class EnemyAutoAttack2D : MonoBehaviour
         var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
         proj.FireArc(p1, t, jumpPower, gameObject.tag);
 
-        // 발사 직전 정면 강제: 수평 속도 부호에 따라 좌/우 스케일 플립
         if (Mathf.Abs(vx) > 0.01f && TryGetComponent(out Facing2D facing))
         {
-            facing.FaceByVelocityX(-vx); // 반대로 보이게 하려면 -vx
+            facing.FaceByVelocityX(-vx); 
         }
     }
 }
