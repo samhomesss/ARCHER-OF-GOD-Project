@@ -866,8 +866,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3036431689856976203, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: skill2Key
+      value: 119
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036431689856976203, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: skill3Key
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036431689856976203, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: skill4Key
-      value: 102
+      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 3036431689856976203, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: skill5Key
