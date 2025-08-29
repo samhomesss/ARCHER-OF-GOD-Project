@@ -171,10 +171,13 @@ MonoBehaviour:
   speed: 23
   gravityScale: 1
   arcHeight: 7
-  damage: 15
+  damage: 80
   lifetime: 3
   pierce: 0
   pierceCount: 1
+  disableColliderOnHit: 0
+  destroyDelayAfterHit: 2
+  stunDuration: 0
   ownerTag: 
   alignToVelocity: 1
   alignLerp: 20

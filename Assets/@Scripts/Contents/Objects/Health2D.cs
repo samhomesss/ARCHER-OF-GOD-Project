@@ -37,6 +37,15 @@ public class Health2D : MonoBehaviour, IDamageable2D
         onDamaged?.Invoke();
         // TODO: 여기에 UI 감소 되는 부분 추가 
 
+        var gm = GameManager.Instance;
+        if (gm != null)
+        {
+            if (this == gm.PlayerHealth)
+                gm.PlayerDamaged((int)amount);
+            else if (this == gm.EnemyHealth)
+                gm.EnemyDamaged((int)amount);
+        }
+
         if (CurrentHealth <= 0)
         {
             onDeath?.Invoke();
