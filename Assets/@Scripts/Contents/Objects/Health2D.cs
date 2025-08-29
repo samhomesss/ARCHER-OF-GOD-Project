@@ -28,7 +28,9 @@ public class Health2D : MonoBehaviour, IDamageable2D
     {
         if (amount <= 0) return;
         CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+        Debug.Log(CurrentHealth + "커런트 값");
         healthSlider.value += amount;
+        Debug.Log(healthSlider.value + "Value 값");
     }
 
 
@@ -38,7 +40,6 @@ public class Health2D : MonoBehaviour, IDamageable2D
         CurrentHealth -= amount;
         healthSlider.value -= amount;
         onDamaged?.Invoke();
-        // TODO: 여기에 UI 감소 되는 부분 추가 
 
         if (CurrentHealth <= 0)
         {

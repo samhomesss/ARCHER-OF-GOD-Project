@@ -13,7 +13,7 @@ public class BowShooter2D : MonoBehaviour
     private Rigidbody2D _rb;
     private float damageMultiplier = 1f;
     private Coroutine damageRoutine;
-
+    public float DamageMultiplier => damageMultiplier;
 
     void Awake()
     {

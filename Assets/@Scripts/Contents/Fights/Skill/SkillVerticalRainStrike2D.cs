@@ -19,6 +19,7 @@ public class SkillVerticalRainStrike2D : SkillBase2D
     [SerializeField] private float xJitter = 0.0f;          
 
     private Transform _target;
+    private BowShooter2D _shooter;
 
     void Awake()
     {
@@ -27,6 +28,7 @@ public class SkillVerticalRainStrike2D : SkillBase2D
             var t = transform.Find("FirePoint");
             if (t) firePoint = t;
         }
+        _shooter = GetComponent<BowShooter2D>();
     }
 
     void Start()
@@ -48,6 +50,7 @@ public class SkillVerticalRainStrike2D : SkillBase2D
     {
         {
             var upProj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+            if (_shooter) upProj.Damage *= _shooter.DamageMultiplier;
             var rb = upProj.GetComponent<Rigidbody2D>();
             if (rb) rb.gravityScale = upwardGravityScale;
             upProj.FireWithVelocity(new Vector2(0f, upwardSpeed), gameObject.tag);
@@ -68,6 +71,7 @@ public class SkillVerticalRainStrike2D : SkillBase2D
             Vector2 start = new Vector2(x, center.y + startHeight);
 
             var proj = Instantiate(projectilePrefab, start, Quaternion.identity);
+            if (_shooter) proj.Damage *= _shooter.DamageMultiplier;
             var rb = proj.GetComponent<Rigidbody2D>();
             if (rb) rb.gravityScale = dropGravityScale;
 

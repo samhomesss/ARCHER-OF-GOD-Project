@@ -30,6 +30,7 @@ public class SkillJumpTripleShot2D : SkillBase2D
 
     private Animator _anim;
     private MonoBehaviour _facingOrFlipper;
+    private BowShooter2D _shooter;
 
     private bool _wasAnimEnabled;
     private bool _wasFacingEnabled;
@@ -52,7 +53,8 @@ public class SkillJumpTripleShot2D : SkillBase2D
             else gfx = this.transform; 
         }
 
-        _facingOrFlipper = GetComponent<MonoBehaviour>(); 
+        _facingOrFlipper = GetComponent<MonoBehaviour>();
+        _shooter = GetComponent<BowShooter2D>();
     }
 
     void Start()
@@ -117,6 +119,7 @@ public class SkillJumpTripleShot2D : SkillBase2D
 
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.Euler(0f, 0f, angle));
+            if (_shooter) proj.Damage *= _shooter.DamageMultiplier;
             var rb = proj.GetComponent<Rigidbody2D>();
             if (rb) rb.gravityScale = 0f; 
             proj.FireWithVelocity(dir * straightSpeed, gameObject.tag);

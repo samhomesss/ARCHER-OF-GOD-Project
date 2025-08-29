@@ -10,6 +10,7 @@ public class SkillPiercingLine2D : SkillBase2D
     [SerializeField] private float targetHeightOffset = 0f;
 
     private Transform _target;
+    private BowShooter2D _shooter;
 
     void Awake()
     {
@@ -18,6 +19,8 @@ public class SkillPiercingLine2D : SkillBase2D
             var t = transform.Find("FirePoint");
             if (t) firePoint = t;
         }
+
+        _shooter = GetComponent<BowShooter2D>();
     }
 
     void Start()
@@ -47,6 +50,7 @@ public class SkillPiercingLine2D : SkillBase2D
             Vector2 dir = (targetPos - (Vector2)firePoint.position).normalized;
 
             var proj = Object.Instantiate(piercingProjectilePrefab, firePoint.position, Quaternion.identity);
+            if (_shooter) proj.Damage *= _shooter.DamageMultiplier;
             var rb = proj.GetComponent<Rigidbody2D>();
             if (rb) rb.gravityScale = 0f; // Æ÷¹°¼± X
             proj.FireWithVelocity(dir * lineSpeed, gameObject.tag);
