@@ -83,4 +83,23 @@ public class GameManager : MonoBehaviour
     {
         OnEnemyDamagedEvent?.Invoke(damage);
     }
+
+    public void DetermineWinnerByHealth()
+    {
+        if (resultShown)
+            return;
+
+        resultShown = true;
+
+        if (playerHealth != null && botHealth != null && playerHealth.CurrentHealth > botHealth.CurrentHealth)
+        {
+            if (playerAnim) playerAnim.Play("victory");
+            winResultCanvas.GetComponent<Canvas>().enabled = true;
+        }
+        else
+        {
+            if (enemyAnim) enemyAnim.Play("victory");
+            loseResultCanvas.GetComponent<Canvas>().enabled = true;
+        }
+    }
 }

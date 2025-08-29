@@ -10,7 +10,7 @@ public class UI_Timer : UI_Scene
 
     TMP_Text _timerText;
 
-    float _timer = 60;
+    public float _timer = 60;
 
     public override bool Init()
     {
@@ -33,13 +33,13 @@ public class UI_Timer : UI_Scene
             return;
 
         _timer -= Time.deltaTime;
+        Debug.Log(_timer);
         _timerText.text = $"{(int)_timer}";
 
-        if ( _timer <= 0 )
+        if (_timer <= 0)
         {
-            // TODO : UI_Result 켜주기 
-            // 플레이어 체력과 적 체력을 비교해서 켜주면 됨 
-
+            _timer = 0;
+            GameManager.Instance?.DetermineWinnerByHealth();
         }
     }
 }
