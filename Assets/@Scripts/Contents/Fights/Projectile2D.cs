@@ -131,6 +131,21 @@ public class Projectile2D : MonoBehaviour
             Vector2 hitNormal = (Vector2)transform.position - hitPoint;
             dmg.TakeDamage(damage, hitPoint, hitNormal, gameObject);
 
+            // Update UI for player or enemy health when hit by a projectile
+            var dmgComponent = dmg as Component;
+            if (dmgComponent != null)
+            {
+                var gm = GameManager.Instance;
+                if (gm != null)
+                {
+                    if (dmgComponent.CompareTag("Player"))
+                        gm.PlayerDamaged((int)damage);
+                    else if (dmgComponent.CompareTag("Enemy"))
+                        gm.EnemyDamaged((int)damage);
+                }
+            }
+
+
             var stunnable = other.GetComponentInParent<IStunnable2D>();
             if (stunnable != null && stunDuration > 0f)
             {

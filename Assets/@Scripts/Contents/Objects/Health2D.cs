@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 
 [DisallowMultipleComponent]
@@ -8,7 +9,7 @@ public class Health2D : MonoBehaviour, IDamageable2D
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private bool destroyOnDeath = true;
 
-
+    public Slider healthSlider;
     public float MaxHealth => maxHealth;
     public float CurrentHealth { get; private set; }
 
@@ -34,17 +35,9 @@ public class Health2D : MonoBehaviour, IDamageable2D
     {
         if (CurrentHealth <= 0) return;
         CurrentHealth -= amount;
+        healthSlider.value -= amount;
         onDamaged?.Invoke();
         // TODO: 여기에 UI 감소 되는 부분 추가 
-
-        var gm = GameManager.Instance;
-        if (gm != null)
-        {
-            if (this == gm.PlayerHealth)
-                gm.PlayerDamaged((int)amount);
-            else if (this == gm.EnemyHealth)
-                gm.EnemyDamaged((int)amount);
-        }
 
         if (CurrentHealth <= 0)
         {

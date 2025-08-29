@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     /// <param name="damage"></param>
     public void PlayerDamaged(int damage)
     {
+        Debug.Log("플레이어 공격 받음");
         OnPlayerDamagedEvent?.Invoke(damage);
     }
 
