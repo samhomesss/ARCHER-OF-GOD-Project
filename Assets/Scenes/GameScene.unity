@@ -606,7 +606,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2689,7 +2690,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3050,7 +3052,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3775,6 +3778,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 277309624125032893, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 289713743989843897, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: xJitter
       value: 4
@@ -3800,17 +3807,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1467427393}
     - target: {fileID: 2017456160389605545, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: lineSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017456160389605545, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: targetHeightOffset
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017456160389605545, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: piercingProjectilePrefab
       value: 
-      objectReference: {fileID: 518067070824617269, guid: 7be6c9d17f5a8284abb958c5fec0327e, type: 3}
+      objectReference: {fileID: 518067070824617269, guid: 8b48ac9c650addd4badec160305a966f, type: 3}
     - target: {fileID: 2263297142965493290, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 1467427393}
     - target: {fileID: 2263297142965493290, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: jumpHeight
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263297142965493290, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: jumpUpTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263297142965493290, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: jumpDownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263297142965493290, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 518067070824617269, guid: 7be6c9d17f5a8284abb958c5fec0327e, type: 3}
+      objectReference: {fileID: 518067070824617269, guid: 7c57a47f24f7d5d4aa02c8f69ead2f56, type: 3}
+    - target: {fileID: 2263297142965493290, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: targetHeightOffset
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282722043587252723, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 2932269139459959030, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 3893994498311097885, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15
@@ -3851,10 +3890,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3957146894978306276, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 4089809260922522183, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 6313441012508879259, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 518067070824617269, guid: 7be6c9d17f5a8284abb958c5fec0327e, type: 3}
+    - target: {fileID: 6416289083603645180, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 6457188479528192456, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 6953743639742541464, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: interval
       value: 1
@@ -3863,6 +3918,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 518067070824617269, guid: 7be6c9d17f5a8284abb958c5fec0327e, type: 3}
+    - target: {fileID: 8304436267423982189, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 8592272594506348715, guid: 6bccdd88d4b0c9b4784c1a401ea9223b, type: 3}
       propertyPath: target
       value: 
@@ -3895,6 +3954,18 @@ PrefabInstance:
     - target: {fileID: 132068634795799537, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: spriteFacesLeft
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 269772158992284853, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: waves
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 269772158992284853, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: coneDegrees
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 269772158992284853, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: arrowsPerWave
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 822813863219034284, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3969,25 +4040,33 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5470650555985712990, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: straightSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470650555985712990, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
+      objectReference: {fileID: 518067070824617269, guid: bf0f5c5744f067b4885b5a030e3d9c83, type: 3}
+    - target: {fileID: 5470650555985712990, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
+      propertyPath: targetHeightOffset
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5930163611168719759, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: shots
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5930163611168719759, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: lineSpeed
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5930163611168719759, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: targetHeightOffset
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5930163611168719759, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: piercingProjectilePrefab
       value: 
-      objectReference: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
+      objectReference: {fileID: 518067070824617269, guid: bae436a921215bd438f127a17e1634c2, type: 3}
     - target: {fileID: 8195108968170372752, guid: cb132c7589a2e21489030a54c16d67fc, type: 3}
       propertyPath: m_Name
       value: Player

@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -265,7 +265,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -353,7 +353,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -440,7 +440,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -527,7 +527,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -615,7 +615,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -703,7 +703,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -753,8 +753,8 @@ GameObject:
   - component: {fileID: 5470650555985712990}
   - component: {fileID: 5930163611168719759}
   - component: {fileID: 6865505018578314823}
-  - component: {fileID: 5333612834873280715}
   - component: {fileID: 269772158992284853}
+  - component: {fileID: 5333612834873280715}
   - component: {fileID: 4491367652571358470}
   - component: {fileID: 8650971851136463656}
   - component: {fileID: 132068634795799537}
@@ -905,6 +905,7 @@ MonoBehaviour:
   skill3Key: 114
   skill4Key: 116
   skill5Key: 102
+  skill6Key: 103
 --- !u!114 &1823259464549928168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,6 +954,8 @@ MonoBehaviour:
   shotInterval: 0.07
   straightSpeed: 22
   targetHeightOffset: 0
+  rotationDuration: 0.1
+  gfx: {fileID: 0}
 --- !u!114 &5930163611168719759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,23 +993,6 @@ MonoBehaviour:
   dashDistance: 4
   dashDuration: 0.15
   invulnerableDuringDash: 1
---- !u!114 &5333612834873280715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8195108968170372752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705eca251fdaf4c419cd13680c96d24e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 3
-  skillName: Skill
-  shooter: {fileID: 4491367652571358470}
-  arrowCount: 10
-  spreadDegrees: 20
 --- !u!114 &269772158992284853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,6 +1012,23 @@ MonoBehaviour:
   arrowsPerWave: 10
   waveInterval: 0.15
   coneDegrees: 45
+--- !u!114 &5333612834873280715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195108968170372752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705eca251fdaf4c419cd13680c96d24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 3
+  skillName: Skill
+  shooter: {fileID: 4491367652571358470}
+  arrowCount: 10
+  spreadDegrees: 20
 --- !u!114 &4491367652571358470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,3 +1075,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
+  spriteFacesLeft: 1

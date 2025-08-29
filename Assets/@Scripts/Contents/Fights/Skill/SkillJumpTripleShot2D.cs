@@ -105,6 +105,9 @@ public class SkillJumpTripleShot2D : SkillBase2D
 
         for (int i = 0; i < shots; i++)
         {
+            if (!_target)
+                break;
+
             Vector2 targetPos = (Vector2)_target.position + Vector2.up * targetHeightOffset;
             Vector2 dir = (targetPos - (Vector2)firePoint.position).normalized;
 

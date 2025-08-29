@@ -56,6 +56,12 @@ public class SkillVerticalRainStrike2D : SkillBase2D
 
         yield return new WaitForSeconds(preDelay);
 
+        if (!_target)
+        {
+            EndCast();
+            yield break;
+        }
+
         // 2) 적 머리 위에서 수직 낙하
         Vector2 center = _target.position;
         for (int i = 0; i < drops; i++)

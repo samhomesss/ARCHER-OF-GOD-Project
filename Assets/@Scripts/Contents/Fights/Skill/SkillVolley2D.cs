@@ -21,8 +21,6 @@ public class SkillVolley2D : SkillBase2D
         if (shooter == null) return false;
         if (!IsReady) return false;
 
-        Debug.Log("¹º°¡ ÇÏ´ÂÁß");
-
         BeginCast();
         StartCoroutine(VolleyRoutine());
         return true;
@@ -37,7 +35,7 @@ public class SkillVolley2D : SkillBase2D
             for (int i = 0; i < arrowsPerWave; i++)
             {
                 float offset = Random.Range(-coneDegrees * 0.5f, coneDegrees * 0.5f);
-                Vector2 dir = Quaternion.Euler(0, 0, offset) * forward;
+                Vector2 dir = Quaternion.Euler(0, 0, offset) * -forward;
                 shooter.Fire(dir, gameObject.tag);
             }
             yield return new WaitForSeconds(waveInterval);
