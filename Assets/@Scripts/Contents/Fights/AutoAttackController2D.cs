@@ -18,12 +18,14 @@ public class AutoAttackController2D : MonoBehaviour
     private SkillBase2D[] _skills;
     private Facing2D _facing;
     private Rigidbody2D _rb;
+    private Animator _anim;
 
     void Awake()
     {
         _skills = GetComponents<SkillBase2D>();
         _facing = GetComponent<Facing2D>();
         _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -65,6 +67,7 @@ public class AutoAttackController2D : MonoBehaviour
         targetPos += Vector2.up * targetHeightOffset;
         Vector2 dir = targetPos - (Vector2)firePoint.position;
         if (_facing) _facing.FaceByVelocityX(dir.x);
+        if (_anim) _anim.Play("attack");
         var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         float distance = dir.magnitude;
         float flightTime = distance / projectilePrefab.Speed;

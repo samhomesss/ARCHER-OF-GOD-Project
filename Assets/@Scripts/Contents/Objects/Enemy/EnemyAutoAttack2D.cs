@@ -17,9 +17,11 @@ public class EnemyAutoAttack2D : MonoBehaviour
     [SerializeField] private float preferHorizSpeed = 10f;
 
     private float _nextTime;
+    private Animator _anim;
 
     void Start()
     {
+        _anim = GetComponentInChildren<Animator>();
         if (target == null)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
@@ -51,6 +53,8 @@ public class EnemyAutoAttack2D : MonoBehaviour
         float vy = (delta.y + 0.5f * g * t * t) / t;
         float jumpPower = (vy * vy) / (2f * g);
 
+
+        if (_anim) _anim.Play("attack");
         var proj = Instantiate(projectilePrefab, p0, Quaternion.identity);
         proj.FireArc(p1, t, jumpPower, gameObject.tag);
 

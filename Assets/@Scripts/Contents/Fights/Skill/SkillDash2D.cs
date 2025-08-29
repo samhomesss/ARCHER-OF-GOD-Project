@@ -22,6 +22,7 @@ public class SkillDash2D : SkillBase2D
     private SpriteRenderer _spriteRenderer;
     private Coroutine _dashEffectCoroutine;
 
+    protected override bool ShouldTriggerAttackAnim => false;
 
     void Awake()
     {

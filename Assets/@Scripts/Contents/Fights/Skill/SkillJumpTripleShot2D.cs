@@ -29,8 +29,9 @@ public class SkillJumpTripleShot2D : SkillBase2D
     private Tween _rotateTween;
 
     private Animator _anim;
-    private MonoBehaviour _facingOrFlipper; 
+    private MonoBehaviour _facingOrFlipper;
 
+    protected override bool ShouldTriggerAttackAnim => false;
     void Awake()
     {
         if (!firePoint)

@@ -25,6 +25,7 @@ public class PlayerController2D : MonoBehaviour
 
     private Facing2D _facing;
     private AutoAttackController2D _autoAttack;
+    private Animator _anim;
 
     void Awake()
     {
@@ -33,6 +34,7 @@ public class PlayerController2D : MonoBehaviour
         _skills = GetComponents<SkillBase2D>();
         _facing = GetComponent<Facing2D>();
         _autoAttack = GetComponent<AutoAttackController2D>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -64,6 +66,16 @@ public class PlayerController2D : MonoBehaviour
                 float diff = _autoAttack.Target.position.x - transform.position.x;
                 if (Mathf.Abs(diff) > 0.01f)
                     _facing.Face(diff < 0 ? 1 : -1);
+            }
+        }
+
+        if (_anim)
+        {
+            var info = _anim.GetCurrentAnimatorStateInfo(0);
+            bool busy = (info.IsName("attack") && info.normalizedTime < 1f) || info.IsName("die") || info.IsName("victory");
+            if (!busy)
+            {
+                _anim.Play(Mathf.Abs(h) > 0.01f ? "walk" : "idle");
             }
         }
     }

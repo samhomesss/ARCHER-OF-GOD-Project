@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Health2D : MonoBehaviour, IDamageable2D
 {
     [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private bool destroyOnDeath = true;
+    [SerializeField] private bool destroyOnDeath = false;
 
     public Slider healthSlider;
     public float MaxHealth => maxHealth;
@@ -42,8 +42,10 @@ public class Health2D : MonoBehaviour, IDamageable2D
         if (CurrentHealth <= 0)
         {
             onDeath?.Invoke();
-            if (destroyOnDeath)
-                Destroy(gameObject);
+
+            var anim = GetComponentInChildren<Animator>();
+            if (anim)
+                anim.Play("die");
         }
     }
 }

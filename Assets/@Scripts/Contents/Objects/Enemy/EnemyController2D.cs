@@ -35,6 +35,7 @@ public class EnemyController2D : MonoBehaviour
 
     private Facing2D _facing;
     private EnemyAutoAttack2D _autoAttack;
+    private Animator _anim;
 
     void Awake()
     {
@@ -43,6 +44,7 @@ public class EnemyController2D : MonoBehaviour
         _skills = GetComponents<SkillBase2D>();
         _facing = GetComponent<Facing2D>();
         _autoAttack = GetComponent<EnemyAutoAttack2D>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
     private void MoveTowards(Vector2 dest)
@@ -72,6 +74,14 @@ public class EnemyController2D : MonoBehaviour
         _rb.linearVelocity = new Vector2(dir.x * moveSpeed, 0f);
 
         if (_facing) _facing.FaceByVelocityX(dir.x);
+
+        if (_anim)
+        {
+            var info = _anim.GetCurrentAnimatorStateInfo(0);
+            bool busy = (info.IsName("attack") && info.normalizedTime < 1f) || info.IsName("die") || info.IsName("victory");
+            if (!busy)
+                _anim.Play("walk");
+        }
     }
 
     private void FaceTargetX()
@@ -111,6 +121,14 @@ public class EnemyController2D : MonoBehaviour
                 yield return null;
             }
             _rb.linearVelocity = Vector2.zero;
+            if (_anim)
+            {
+                var info = _anim.GetCurrentAnimatorStateInfo(0);
+                bool busy = (info.IsName("attack") && info.normalizedTime < 1f) || info.IsName("die") || info.IsName("victory");
+                if (!busy)
+                    _anim.Play("idle");
+            }
+
 
 
             _state = BotState.Pause;

@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Health2D playerHealth;
     [SerializeField] private Health2D botHealth;
 
+    private Animator playerAnim;
+    private Animator enemyAnim;
+
     public event Action<int> OnPlayerDamagedEvent;
     public event Action<int> OnEnemyDamagedEvent;
 
@@ -31,8 +34,17 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (playerHealth) playerHealth.onDeath.AddListener(() => Debug.Log("Enemy Wins!"));
-        if (botHealth) botHealth.onDeath.AddListener(() => Debug.Log("Player Wins!"));
+        if (playerHealth) playerAnim = playerHealth.GetComponentInChildren<Animator>();
+        if (botHealth) enemyAnim = botHealth.GetComponentInChildren<Animator>();
+
+        if (playerHealth) playerHealth.onDeath.AddListener(() =>
+        {
+            if (enemyAnim) enemyAnim.Play("victory");
+        });
+        if (botHealth) botHealth.onDeath.AddListener(() =>
+        {
+            if (playerAnim) playerAnim.Play("victory");
+        });
     }
 
     /// <summary>
