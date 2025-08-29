@@ -62,16 +62,18 @@ public class EnemyController2D : MonoBehaviour
 
         dest.x = Mathf.Clamp(dest.x, minX, maxX);
 
-        Vector2 currentPos = _rb.position;
-        Vector2 targetPos = new Vector2(dest.x, currentPos.y);
+        Vector2 dir = new Vector2(dest.x - currentX, 0f).normalized;
 
-        Vector2 newPos = Vector2.MoveTowards(currentPos, targetPos, moveSpeed * Time.deltaTime);
-        _rb.MovePosition(newPos);
+        if ((dir.x < 0f && currentX <= minX) ||
+            (dir.x > 0f && currentX >= maxX))
+        {
+            _rb.linearVelocity = Vector2.zero;
+            return;
+        }
 
-        if (Vector2.Distance(newPos, targetPos) < 0.001f)
-            _rb.position = targetPos;
+        _rb.linearVelocity = new Vector2(dir.x * moveSpeed, 0f);
 
-        if (_facing) _facing.FaceByVelocityX(newPos.x - currentPos.x);
+        if (_facing) _facing.FaceByVelocityX(dir.x);
 
         if (_anim)
         {
