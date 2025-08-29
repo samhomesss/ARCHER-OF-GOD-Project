@@ -46,6 +46,7 @@ public class Health2D : MonoBehaviour, IDamageable2D
             var anim = GetComponentInChildren<Animator>();
             if (anim)
                 anim.Play("die");
+            Destroy(gameObject);
         }
     }
 }

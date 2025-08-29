@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Health2D playerHealth;
     [SerializeField] private Health2D botHealth;
+    [SerializeField] private GameObject winResultCanvas;
+    [SerializeField] private GameObject loseResultCanvas;
 
     private Animator playerAnim;
     private Animator enemyAnim;
@@ -33,6 +35,11 @@ public class GameManager : MonoBehaviour
             if (e) botHealth = e.GetComponent<Health2D>();
         }
 
+        if (winResultCanvas.GetComponent<Canvas>().enabled)
+            winResultCanvas.GetComponent<Canvas>().enabled = false;
+        if (loseResultCanvas.GetComponent<Canvas>().enabled)
+            loseResultCanvas.GetComponent<Canvas>().enabled = false;
+
 
         if (playerHealth) playerAnim = playerHealth.GetComponentInChildren<Animator>();
         if (botHealth) enemyAnim = botHealth.GetComponentInChildren<Animator>();
@@ -40,10 +47,13 @@ public class GameManager : MonoBehaviour
         if (playerHealth) playerHealth.onDeath.AddListener(() =>
         {
             if (enemyAnim) enemyAnim.Play("victory");
+            loseResultCanvas.GetComponent<Canvas>().enabled = true;
         });
         if (botHealth) botHealth.onDeath.AddListener(() =>
         {
             if (playerAnim) playerAnim.Play("victory");
+            winResultCanvas.GetComponent<Canvas>().enabled = true;
+
         });
     }
 

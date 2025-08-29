@@ -31,6 +31,9 @@ public class SkillJumpTripleShot2D : SkillBase2D
     private Animator _anim;
     private MonoBehaviour _facingOrFlipper;
 
+    private bool _wasAnimEnabled;
+    private bool _wasFacingEnabled;
+
     protected override bool ShouldTriggerAttackAnim => false;
     void Awake()
     {
@@ -63,6 +66,17 @@ public class SkillJumpTripleShot2D : SkillBase2D
     {
         if (!firePoint || !projectilePrefab || !_target) return false;
 
+        if (_anim)
+        {
+            _wasAnimEnabled = _anim.enabled;
+            _anim.enabled = false;
+        }
+        if (_facingOrFlipper)
+        {
+            _wasFacingEnabled = _facingOrFlipper.enabled;
+            _facingOrFlipper.enabled = false;
+        }
+
         BeginCast();
         StartCoroutine(JumpAndShoot());
         return true;
@@ -73,19 +87,6 @@ public class SkillJumpTripleShot2D : SkillBase2D
         Vector2 basePos = _rb.position;
         Quaternion baseGfxRot = gfx.rotation;
         Vector3 baseGfxScale = gfx.localScale;
-
-        bool wasAnimEnabled = false;
-        if (_anim)
-        {
-            wasAnimEnabled = _anim.enabled;
-            _anim.enabled = false;
-        }
-        bool wasFacingEnabled = false;
-        if (_facingOrFlipper)
-        {
-            wasFacingEnabled = _facingOrFlipper.enabled;
-            _facingOrFlipper.enabled = false;
-        }
 
         _jumpTween?.Kill();
         _jumpTween = DOTween.Sequence()
@@ -127,9 +128,6 @@ public class SkillJumpTripleShot2D : SkillBase2D
         _rotateTween.Kill();
         gfx.rotation = baseGfxRot;
         gfx.localScale = baseGfxScale;
-
-        if (_anim) _anim.enabled = wasAnimEnabled;
-        if (_facingOrFlipper) _facingOrFlipper.enabled = wasFacingEnabled;
 
         EndCast();
     }
