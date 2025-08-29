@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     public Health2D PlayerHealth => playerHealth;
     public Health2D EnemyHealth => botHealth;
 
+    void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {
