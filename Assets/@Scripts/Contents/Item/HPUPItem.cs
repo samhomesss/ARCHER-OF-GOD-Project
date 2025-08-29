@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class HPUPItem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float healAmount = 500f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        {
+            var health = other.GetComponentInParent<Health2D>();
+
+            if (health != null)
+            {
+                health.Heal(healAmount);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

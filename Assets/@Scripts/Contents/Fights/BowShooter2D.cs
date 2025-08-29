@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 
 public class BowShooter2D : MonoBehaviour
 {
@@ -11,6 +11,8 @@ public class BowShooter2D : MonoBehaviour
 
     private float _lastFire;
     private Rigidbody2D _rb;
+    private float damageMultiplier = 1f;
+    private Coroutine damageRoutine;
 
 
     void Awake()
@@ -34,6 +36,7 @@ public class BowShooter2D : MonoBehaviour
 
 
         var proj = Instantiate(prefabOverride, firePoint.position, Quaternion.identity);
+        proj.Damage *= damageMultiplier;
         proj.StunDuration = stunDuration;
         proj.Fire(direction, ownerTag);
 
@@ -43,5 +46,19 @@ public class BowShooter2D : MonoBehaviour
 
 
         _lastFire = Time.time;
+    }
+
+    public void ApplyDamageMultiplier(float multiplier, float duration)
+    {
+        if (damageRoutine != null) StopCoroutine(damageRoutine);
+        damageMultiplier = multiplier;
+        damageRoutine = StartCoroutine(ResetDamageMultiplier(duration));
+    }
+
+    private IEnumerator ResetDamageMultiplier(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        damageMultiplier = 1f;
+        damageRoutine = null;
     }
 }

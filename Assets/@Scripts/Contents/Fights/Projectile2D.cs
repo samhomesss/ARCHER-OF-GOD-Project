@@ -39,6 +39,7 @@ public class Projectile2D : MonoBehaviour
 
     public float Speed => speed;
     public float ArcHeight => arcHeight;
+    public float Damage { get => damage; set => damage = value; }
     public float StunDuration { get => stunDuration; set => stunDuration = value; }
     void Awake()
     {

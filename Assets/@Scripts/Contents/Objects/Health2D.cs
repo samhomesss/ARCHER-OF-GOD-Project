@@ -28,6 +28,7 @@ public class Health2D : MonoBehaviour, IDamageable2D
     {
         if (amount <= 0) return;
         CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+        healthSlider.value += amount;
     }
 
 
