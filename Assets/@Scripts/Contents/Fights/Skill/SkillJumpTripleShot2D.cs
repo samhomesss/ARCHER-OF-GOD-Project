@@ -20,9 +20,16 @@ public class SkillJumpTripleShot2D : SkillBase2D
     [Header("Rotation")]
     [SerializeField] private float rotationDuration = 0.1f;
 
+    [Header("Visual Root")]
+    [SerializeField] private Transform gfx; 
+
     private Transform _target;
     private Rigidbody2D _rb;
     private Tween _jumpTween;
+    private Tween _rotateTween;
+
+    private Animator _anim;
+    private MonoBehaviour _facingOrFlipper; 
 
     void Awake()
     {
@@ -32,6 +39,16 @@ public class SkillJumpTripleShot2D : SkillBase2D
             if (t) firePoint = t;
         }
         _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponentInChildren<Animator>(); 
+
+        if (!gfx)
+        {
+            var sr = GetComponentInChildren<SpriteRenderer>();
+            if (sr) gfx = sr.transform;
+            else gfx = this.transform; 
+        }
+
+        _facingOrFlipper = GetComponent<MonoBehaviour>(); 
     }
 
     void Start()
@@ -53,41 +70,63 @@ public class SkillJumpTripleShot2D : SkillBase2D
     private IEnumerator JumpAndShoot()
     {
         Vector2 basePos = _rb.position;
-        Quaternion baseRot = transform.rotation;
+        Quaternion baseGfxRot = gfx.rotation;
+        Vector3 baseGfxScale = gfx.localScale;
 
-        // 점프(상승→하강)
+        bool wasAnimEnabled = false;
+        if (_anim)
+        {
+            wasAnimEnabled = _anim.enabled;
+            _anim.enabled = false;
+        }
+        bool wasFacingEnabled = false;
+        if (_facingOrFlipper)
+        {
+            wasFacingEnabled = _facingOrFlipper.enabled;
+            _facingOrFlipper.enabled = false;
+        }
+
         _jumpTween?.Kill();
         _jumpTween = DOTween.Sequence()
             .Append(_rb.DOMoveY(basePos.y + jumpHeight, jumpUpTime).SetEase(Ease.OutQuad))
             .Append(_rb.DOMoveY(basePos.y, jumpDownTime).SetEase(Ease.InQuad));
 
-        Tween rotateTween = transform
+        
+        float sign = Mathf.Sign(baseGfxScale.x == 0 ? 1 : baseGfxScale.x);
+        gfx.localScale = new Vector3(3.5f * sign, 0.8f, baseGfxScale.z);
+
+        _rotateTween?.Kill();
+        _rotateTween = gfx
             .DORotate(new Vector3(0f, 0f, 360f), rotationDuration, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
 
         yield return new WaitForSeconds(jumpUpTime);
 
-        // 3연속 직사
         for (int i = 0; i < shots; i++)
         {
             Vector2 targetPos = (Vector2)_target.position + Vector2.up * targetHeightOffset;
             Vector2 dir = (targetPos - (Vector2)firePoint.position).normalized;
 
-            var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.Euler(0f, 0f, angle));
             var rb = proj.GetComponent<Rigidbody2D>();
-
-            if (rb) rb.gravityScale = 0f; // 포물선 X, 완전 직사
+            if (rb) rb.gravityScale = 0f; 
             proj.FireWithVelocity(dir * straightSpeed, gameObject.tag);
 
             if (i < shots - 1)
                 yield return new WaitForSeconds(shotInterval);
         }
 
-        // 점프 끝날 때까지 대기
         yield return _jumpTween.WaitForCompletion();
-        rotateTween.Kill();
-        transform.rotation = baseRot;
+
+        _rotateTween.Kill();
+        gfx.rotation = baseGfxRot;
+        gfx.localScale = baseGfxScale;
+
+        if (_anim) _anim.enabled = wasAnimEnabled;
+        if (_facingOrFlipper) _facingOrFlipper.enabled = wasFacingEnabled;
+
         EndCast();
     }
 }
