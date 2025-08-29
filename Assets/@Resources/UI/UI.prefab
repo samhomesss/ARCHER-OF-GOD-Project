@@ -2431,6 +2431,7 @@ GameObject:
   - component: {fileID: 3831443469030099395}
   - component: {fileID: 9106773575812309771}
   - component: {fileID: 1288493803703954471}
+  - component: {fileID: 3194401992325735011}
   m_Layer: 0
   m_Name: UI_PlayerDamageUP
   m_TagString: Untagged
@@ -2521,6 +2522,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3194401992325735011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2951299342353954927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db34de0d44eec1c4b8267cc27b1562aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3105665735729149601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4772,6 +4785,7 @@ GameObject:
   - component: {fileID: 2582048428668813260}
   - component: {fileID: 3402649664243016046}
   - component: {fileID: 9054749927207217651}
+  - component: {fileID: 429376487188567716}
   m_Layer: 0
   m_Name: UI_EnemyDamageUP
   m_TagString: Untagged
@@ -4862,6 +4876,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &429376487188567716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6420646224921203982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b93ee52c0b6554e83adb9d90f70d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6469967745606829466
 GameObject:
   m_ObjectHideFlags: 0
