@@ -759,6 +759,7 @@ GameObject:
   - component: {fileID: 6953743639742541464}
   - component: {fileID: 2186140577351908289}
   - component: {fileID: 6526006056251416323}
+  - component: {fileID: 1052211091945966456}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -917,10 +918,7 @@ MonoBehaviour:
   cooldown: 3
   skillName: Skill
   shooter: {fileID: 6313441012508879259}
-  waves: 3
-  arrowsPerWave: 6
-  waveInterval: 0.15
-  coneDegrees: 45
+  stunDuration: 1
 --- !u!114 &2263297142965493290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,15 +933,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   skillName: Skill
-  jumpHeight: 2
-  jumpUpTime: 0.12
-  jumpDownTime: 0.14
-  firePoint: {fileID: 0}
-  projectilePrefab: {fileID: 0}
+  jumpHeight: 7
+  jumpUpTime: 1
+  jumpDownTime: 1
+  firePoint: {fileID: 7086993315476821050}
+  projectilePrefab: {fileID: 518067070824617269, guid: 7c57a47f24f7d5d4aa02c8f69ead2f56, type: 3}
   shots: 3
   shotInterval: 0.07
   straightSpeed: 22
-  targetHeightOffset: 0
+  targetHeightOffset: 4
   rotationDuration: 0.1
   gfx: {fileID: 0}
 --- !u!114 &2017456160389605545
@@ -960,12 +958,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   skillName: Skill
-  firePoint: {fileID: 0}
-  piercingProjectilePrefab: {fileID: 0}
-  lineSpeed: 28
+  firePoint: {fileID: 7086993315476821050}
+  piercingProjectilePrefab: {fileID: 518067070824617269, guid: 8b48ac9c650addd4badec160305a966f, type: 3}
+  lineSpeed: 50
   shots: 1
   interval: 0.06
-  targetHeightOffset: 0
+  targetHeightOffset: 4
 --- !u!114 &289713743989843897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,17 +978,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   skillName: Skill
-  firePoint: {fileID: 0}
-  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 7086993315476821050}
+  projectilePrefab: {fileID: 518067070824617269, guid: 7be6c9d17f5a8284abb958c5fec0327e, type: 3}
   upwardSpeed: 20
   upwardGravityScale: 1.5
   preDelay: 0.12
   drops: 8
-  startHeight: 6
+  startHeight: 15
   dropSpeed: 18
   dropGravityScale: 1.5
-  interval: 0.055
-  xJitter: 0
+  interval: 0.2
+  xJitter: 4
 --- !u!114 &1243350948372566117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 7086993315476821050}
-  projectilePrefab: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
+  projectilePrefab: {fileID: 518067070824617269, guid: 7be6c9d17f5a8284abb958c5fec0327e, type: 3}
   fireCooldown: 0.25
   recoilKick: 0
 --- !u!114 &8592272594506348715
@@ -1058,8 +1056,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  interval: 0.5
-  projectilePrefab: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
+  interval: 1
+  projectilePrefab: {fileID: 518067070824617269, guid: 7be6c9d17f5a8284abb958c5fec0327e, type: 3}
   firePoint: {fileID: 7086993315476821050}
   targetHeightOffset: 1
 --- !u!114 &2186140577351908289
@@ -1096,3 +1094,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
   spriteFacesLeft: 1
+--- !u!114 &1052211091945966456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740936106035494741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b209ca2eeb3f4341a1f0ba7dac3c0ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnStun: []
+  rb: {fileID: 0}

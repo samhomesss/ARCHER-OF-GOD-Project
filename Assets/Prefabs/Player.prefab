@@ -758,6 +758,7 @@ GameObject:
   - component: {fileID: 4491367652571358470}
   - component: {fileID: 8650971851136463656}
   - component: {fileID: 132068634795799537}
+  - component: {fileID: 6516937313869373177}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -903,7 +904,7 @@ MonoBehaviour:
   skill1Key: 113
   skill2Key: 101
   skill3Key: 114
-  skill4Key: 116
+  skill4Key: 32
   skill5Key: 102
   skill6Key: 103
 --- !u!114 &1823259464549928168
@@ -921,16 +922,16 @@ MonoBehaviour:
   cooldown: 3
   skillName: Skill
   firePoint: {fileID: 1584413006653067395}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 518067070824617269, guid: 96a776908ff97434dba633abd63f86c5, type: 3}
   upwardSpeed: 20
   upwardGravityScale: 1.5
   preDelay: 0.12
   drops: 8
-  startHeight: 6
+  startHeight: 15
   dropSpeed: 18
   dropGravityScale: 1.5
-  interval: 0.055
-  xJitter: 0
+  interval: 0.2
+  xJitter: 4
 --- !u!114 &5470650555985712990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,15 +946,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   skillName: Skill
-  jumpHeight: 2
-  jumpUpTime: 0.12
-  jumpDownTime: 0.14
+  jumpHeight: 7
+  jumpUpTime: 1
+  jumpDownTime: 1
   firePoint: {fileID: 1584413006653067395}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 518067070824617269, guid: bf0f5c5744f067b4885b5a030e3d9c83, type: 3}
   shots: 3
   shotInterval: 0.07
-  straightSpeed: 22
-  targetHeightOffset: 0
+  straightSpeed: 40
+  targetHeightOffset: 4
   rotationDuration: 0.1
   gfx: {fileID: 0}
 --- !u!114 &5930163611168719759
@@ -971,11 +972,11 @@ MonoBehaviour:
   cooldown: 3
   skillName: Skill
   firePoint: {fileID: 1584413006653067395}
-  piercingProjectilePrefab: {fileID: 0}
-  lineSpeed: 28
+  piercingProjectilePrefab: {fileID: 518067070824617269, guid: bae436a921215bd438f127a17e1634c2, type: 3}
+  lineSpeed: 50
   shots: 1
   interval: 0.06
-  targetHeightOffset: 0
+  targetHeightOffset: 4
 --- !u!114 &6865505018578314823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,10 +1009,7 @@ MonoBehaviour:
   cooldown: 3
   skillName: Skill
   shooter: {fileID: 4491367652571358470}
-  waves: 5
-  arrowsPerWave: 10
-  waveInterval: 0.15
-  coneDegrees: 45
+  stunDuration: 1
 --- !u!114 &5333612834873280715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,4 +1073,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
-  spriteFacesLeft: 1
+  spriteFacesLeft: 0
+--- !u!114 &6516937313869373177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195108968170372752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b209ca2eeb3f4341a1f0ba7dac3c0ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnStun: []
+  rb: {fileID: 0}

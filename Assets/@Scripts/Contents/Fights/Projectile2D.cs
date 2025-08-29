@@ -18,6 +18,8 @@ public class Projectile2D : MonoBehaviour
     [SerializeField] private bool pierce = false;
     [SerializeField] private int pierceCount = 1;
 
+    [Header("Crowd Control")]
+    [SerializeField] private float stunDuration = 0f;
 
     [Header("Owner")]
     [SerializeField] private string ownerTag; // set by spawner
@@ -35,7 +37,7 @@ public class Projectile2D : MonoBehaviour
 
     public float Speed => speed;
     public float ArcHeight => arcHeight;
-
+    public float StunDuration { get => stunDuration; set => stunDuration = value; }
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -127,6 +129,11 @@ public class Projectile2D : MonoBehaviour
             Vector2 hitNormal = (Vector2)transform.position - hitPoint;
             dmg.TakeDamage(damage, hitPoint, hitNormal, gameObject);
 
+            var stunnable = other.GetComponentInParent<IStunnable2D>();
+            if (stunnable != null && stunDuration > 0f)
+            {
+                stunnable.Stun(stunDuration);
+            }
 
             if (!pierce || (--pierceCount <= 0))
             {
