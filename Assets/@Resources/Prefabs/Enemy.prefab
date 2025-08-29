@@ -885,6 +885,9 @@ MonoBehaviour:
   dashDistance: 4
   dashDuration: 0.15
   invulnerableDuringDash: 1
+  dashEffectPrefab: {fileID: 0}
+  dashEffectInterval: 0.05
+  dashEffectDuration: 0.3
 --- !u!114 &6558032614795527779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,6 +989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1500
   destroyOnDeath: 1
+  healthSlider: {fileID: 0}
   onDamaged:
     m_PersistentCalls:
       m_Calls: []

@@ -881,6 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1500
   destroyOnDeath: 1
+  healthSlider: {fileID: 0}
   onDamaged:
     m_PersistentCalls:
       m_Calls: []
@@ -1009,6 +1010,9 @@ MonoBehaviour:
   dashDistance: 4
   dashDuration: 0.15
   invulnerableDuringDash: 1
+  dashEffectPrefab: {fileID: 0}
+  dashEffectInterval: 0.05
+  dashEffectDuration: 0.3
 --- !u!114 &4491367652571358470
 MonoBehaviour:
   m_ObjectHideFlags: 0
