@@ -8,6 +8,8 @@ public class UI_PlayerMove : UI_Scene
         RightArrow,
     }
 
+    PlayerController2D _player;
+
 
     public override bool Init()
     {
@@ -15,7 +17,10 @@ public class UI_PlayerMove : UI_Scene
             return false;
 
         BindButtons(typeof(Buttons));
-       
+
+        var playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj)
+            _player = playerObj.GetComponent<PlayerController2D>();
 
         return true;
     }
@@ -24,12 +29,14 @@ public class UI_PlayerMove : UI_Scene
     {
         GetButton((int)Buttons.LeftArrow).onClick.AddListener(() =>
         {
-            // 플레이어 왼쪽 이동 
+            if (_player != null)
+                _player.SetHorizontal(-1f);
         });
 
         GetButton((int)Buttons.RightArrow).onClick.AddListener(() =>
         {
-            // 플레이어 오른쪽 이동 
+            if (_player != null)
+                _player.SetHorizontal(1f);
         });
     }
 }

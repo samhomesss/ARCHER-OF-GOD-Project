@@ -19,8 +19,12 @@ public class UI_PlayerHP : UI_Scene
 
         _playerHpSlider = GetObject((int)GameObjects.PlayerHPSlider).GetComponent<Slider>();
 
-        Debug.Log(_playerHpSlider.name);
-
+         
         return true;
+    }
+
+    private void Start()
+    {
+        
     }
 }

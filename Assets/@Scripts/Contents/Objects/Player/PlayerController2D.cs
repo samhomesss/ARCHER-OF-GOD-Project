@@ -8,6 +8,8 @@ public class PlayerController2D : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
 
+    // Horizontal input value from UI buttons (-1, 0, 1)
+    private float _uiHorizontal = 0f;
 
     [Header("Input Keys")] // TODO : 해당 부분 이제 키보드가 아닌 모바일 버전으로 터치로 바꿔야 함 
     [SerializeField] private KeyCode skill1Key = KeyCode.Q;
@@ -45,7 +47,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void HandleMovement()
     {
-        float h = Input.GetAxisRaw("Horizontal");
+        float h = Mathf.Abs(_uiHorizontal) > 0.01f ? _uiHorizontal : Input.GetAxisRaw("Horizontal");
         Debug.Log("좌우 값 : " + h);
         Vector2 dir = new Vector2(h, 0f).normalized;
         _rb.linearVelocity = dir * moveSpeed;
@@ -66,6 +68,10 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public void SetHorizontal(float dir)
+    {
+        _uiHorizontal = Mathf.Clamp(dir, -1f, 1f);
+    }
 
     private void HandleSkills()
     {
