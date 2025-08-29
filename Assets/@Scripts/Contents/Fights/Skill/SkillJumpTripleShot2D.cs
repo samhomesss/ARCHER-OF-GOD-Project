@@ -14,8 +14,11 @@ public class SkillJumpTripleShot2D : SkillBase2D
     [SerializeField] private Projectile2D projectilePrefab;
     [SerializeField] private int shots = 3;
     [SerializeField] private float shotInterval = 0.07f;
-    [SerializeField] private float straightSpeed = 22f;  // 직선 속도
-    [SerializeField] private float targetHeightOffset = 0.0f; // 머리나 몸통을 노리고 싶으면 조절
+    [SerializeField] private float straightSpeed = 22f;
+    [SerializeField] private float targetHeightOffset = 0.0f;
+
+    [Header("Rotation")]
+    [SerializeField] private float rotationDuration = 0.1f;
 
     private Transform _target;
     private Rigidbody2D _rb;
@@ -50,12 +53,20 @@ public class SkillJumpTripleShot2D : SkillBase2D
     private IEnumerator JumpAndShoot()
     {
         Vector2 basePos = _rb.position;
+        Quaternion baseRot = transform.rotation;
 
         // 점프(상승→하강)
         _jumpTween?.Kill();
         _jumpTween = DOTween.Sequence()
             .Append(_rb.DOMoveY(basePos.y + jumpHeight, jumpUpTime).SetEase(Ease.OutQuad))
             .Append(_rb.DOMoveY(basePos.y, jumpDownTime).SetEase(Ease.InQuad));
+
+        Tween rotateTween = transform
+            .DORotate(new Vector3(0f, 0f, 360f), rotationDuration, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+
+        yield return new WaitForSeconds(jumpUpTime);
 
         // 3연속 직사
         for (int i = 0; i < shots; i++)
@@ -65,6 +76,7 @@ public class SkillJumpTripleShot2D : SkillBase2D
 
             var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
             var rb = proj.GetComponent<Rigidbody2D>();
+
             if (rb) rb.gravityScale = 0f; // 포물선 X, 완전 직사
             proj.FireWithVelocity(dir * straightSpeed, gameObject.tag);
 
@@ -74,6 +86,8 @@ public class SkillJumpTripleShot2D : SkillBase2D
 
         // 점프 끝날 때까지 대기
         yield return _jumpTween.WaitForCompletion();
+        rotateTween.Kill();
+        transform.rotation = baseRot;
         EndCast();
     }
 }
