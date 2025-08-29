@@ -24,11 +24,16 @@ public class BowShooter2D : MonoBehaviour
 
     public void Fire(Vector2 direction, string ownerTag, float stunDuration = 0f)
     {
-        if (!CanFire || projectilePrefab == null || firePoint == null) return;
+        Fire(direction, ownerTag, projectilePrefab, stunDuration);
+    }
 
 
-        var proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        // DO NOT pre-rotate here; projectile will align itself by velocity
+    public void Fire(Vector2 direction, string ownerTag, Projectile2D prefabOverride, float stunDuration = 0f)
+    {
+        if (!CanFire || prefabOverride == null || firePoint == null) return;
+
+
+        var proj = Instantiate(prefabOverride, firePoint.position, Quaternion.identity);
         proj.StunDuration = stunDuration;
         proj.Fire(direction, ownerTag);
 

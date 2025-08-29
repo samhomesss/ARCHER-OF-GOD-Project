@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class SkillVolley2D : SkillBase2D
+public class SkillStun2D : SkillBase2D
 {
     [SerializeField] private BowShooter2D shooter;
+    [SerializeField] private Projectile2D projectilePrefab;
     [SerializeField] private float stunDuration = 1f;
     //[SerializeField] private int waves = 3;
     //[SerializeField] private int arrowsPerWave = 6;
@@ -19,12 +20,12 @@ public class SkillVolley2D : SkillBase2D
     protected override bool Cast()
     {
         if (shooter == null) shooter = GetComponent<BowShooter2D>();
-        if (shooter == null) return false;
+        if (shooter == null || projectilePrefab == null) return false;
         if (!IsReady) return false;
 
         BeginCast();
         Vector2 forward = _facing ? _facing.Forward : (Vector2)transform.right;
-        shooter.Fire(-forward, gameObject.tag, stunDuration);
+        shooter.Fire(-forward, gameObject.tag, projectilePrefab, stunDuration);
         EndCast();
         return true;
     }

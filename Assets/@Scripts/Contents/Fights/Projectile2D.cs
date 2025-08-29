@@ -17,6 +17,8 @@ public class Projectile2D : MonoBehaviour
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private bool pierce = false;
     [SerializeField] private int pierceCount = 1;
+    [SerializeField] private bool disableColliderOnHit = false;
+    [SerializeField] private float destroyDelayAfterHit = 2f;
 
     [Header("Crowd Control")]
     [SerializeField] private float stunDuration = 0f;
@@ -135,7 +137,13 @@ public class Projectile2D : MonoBehaviour
                 stunnable.Stun(stunDuration);
             }
 
-            if (!pierce || (--pierceCount <= 0))
+            if (disableColliderOnHit)
+            {
+                var col = GetComponent<Collider2D>();
+                if (col) col.enabled = false;
+                Destroy(gameObject, destroyDelayAfterHit);
+            }
+            else if (!pierce || (--pierceCount <= 0))
             {
                 _moveTween?.Kill();
                 Destroy(gameObject);
