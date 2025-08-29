@@ -32,6 +32,8 @@ public class Projectile2D : MonoBehaviour
     [SerializeField] private float alignLerp = 20f; // higher = snappier
     [SerializeField] private float visualAngleOffsetDeg = -90f; // sprite faces UP by default ¡æ -90¡Æ
 
+    [Header("Effects")]
+    public GameObject hitEffectPrefab;
 
     private Rigidbody2D _rb;
     private float _timer;
@@ -146,6 +148,10 @@ public class Projectile2D : MonoBehaviour
                 }
             }
 
+            if (dmgComponent && hitEffectPrefab && (dmgComponent.CompareTag("Player") || dmgComponent.CompareTag("Enemy")))
+            {
+                Instantiate(hitEffectPrefab, hitPoint, Quaternion.identity);
+            }
 
             var stunnable = other.GetComponentInParent<IStunnable2D>();
             if (stunnable != null && stunDuration > 0f)

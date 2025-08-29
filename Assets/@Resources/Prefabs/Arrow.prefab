@@ -181,6 +181,7 @@ MonoBehaviour:
   alignToVelocity: 1
   alignLerp: 20
   visualAngleOffsetDeg: -90
+  hitEffectPrefab: {fileID: 6813623134718714127, guid: 2a0d37090399da3428d86ccac504b73c, type: 3}
 --- !u!96 &9152132373769379264
 TrailRenderer:
   serializedVersion: 3
