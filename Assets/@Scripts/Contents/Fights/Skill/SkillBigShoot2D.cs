@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class SkillStun2D : SkillBase2D
+public class SkillBigShoot2D : SkillBase2D
 {
     [SerializeField] private BowShooter2D shooter;
     [SerializeField] private Projectile2D projectilePrefab;
-    [SerializeField] private float stunDuration = 1f;
+    [SerializeField] private float stunDuration = 1f; // 스턴을 사용할거면 사용
     //[SerializeField] private int waves = 3;
     //[SerializeField] private int arrowsPerWave = 6;
     //[SerializeField] private float waveInterval = 0.15f;

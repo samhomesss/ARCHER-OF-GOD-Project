@@ -69,6 +69,8 @@ public class SkillJumpTripleShot2D : SkillBase2D
         if (_anim)
         {
             _wasAnimEnabled = _anim.enabled;
+            _anim.Play("idle", 0, 0f);
+            _anim.Update(0f);
             _anim.enabled = false;
         }
         if (_facingOrFlipper)
@@ -128,6 +130,15 @@ public class SkillJumpTripleShot2D : SkillBase2D
         _rotateTween.Kill();
         gfx.rotation = baseGfxRot;
         gfx.localScale = baseGfxScale;
+
+        if (_anim)
+        {
+            _anim.enabled = _wasAnimEnabled;
+            if (_anim.enabled)
+                _anim.Play("idle");
+        }
+        if (_facingOrFlipper)
+            _facingOrFlipper.enabled = _wasFacingEnabled;
 
         EndCast();
     }

@@ -49,7 +49,7 @@ public class UI_PlayerSkill : UI_Scene
             _playerSkills[0] = player.GetComponent<SkillJumpTripleShot2D>();
             _playerSkills[1] = player.GetComponent<SkillVerticalRainStrike2D>();
             _playerSkills[2] = player.GetComponent<SkillPiercingLine2D>();
-            _playerSkills[3] = player.GetComponent<SkillStun2D>();
+            _playerSkills[3] = player.GetComponent<SkillBigShoot2D>();
             _playerSkills[4] = player.GetComponent<SkillDash2D>();
         }
 
