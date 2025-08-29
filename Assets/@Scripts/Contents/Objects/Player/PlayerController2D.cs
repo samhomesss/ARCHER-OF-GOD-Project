@@ -26,6 +26,7 @@ public class PlayerController2D : MonoBehaviour
     private Facing2D _facing;
     private AutoAttackController2D _autoAttack;
     private Animator _anim;
+    private UI_PlayerSkill _uiSkill;
 
     void Awake()
     {
@@ -35,6 +36,7 @@ public class PlayerController2D : MonoBehaviour
         _facing = GetComponent<Facing2D>();
         _autoAttack = GetComponent<AutoAttackController2D>();
         _anim = GetComponentInChildren<Animator>();
+        _uiSkill = FindObjectOfType<UI_PlayerSkill>();
     }
 
     void Update()
@@ -99,6 +101,9 @@ public class PlayerController2D : MonoBehaviour
     private void TrySkillIndex(int idx)
     {
         if (idx < 0 || idx >= _skills.Length) return;
-        _skills[idx].TryCast();
+        if (_skills[idx].TryCast() && _uiSkill != null)
+        {
+            _uiSkill.StartCoolTimer(idx, _skills[idx]);
+        }
     }
 }

@@ -74,11 +74,11 @@ public class UI_PlayerSkill : UI_Scene
         });
         GetButton((int)Buttons.SkillCardImage4).onClick.AddListener(() =>
         {
-            TryCastSkill(3);
+            TryCastSkill(4);
         });
         GetButton((int)Buttons.SkillCardImage5).onClick.AddListener(() =>
         {
-            TryCastSkill(4);
+            TryCastSkill(3);
         });
     }
 
@@ -89,7 +89,15 @@ public class UI_PlayerSkill : UI_Scene
 
         SkillBase2D skill = _playerSkills[index];
         if (skill != null && skill.TryCast())
-            StartCoroutine(CoolTimeRoutine(skill, _skillCoolTimers[index]));
+            StartCoolTimer(index, skill);
+    }
+
+    public void StartCoolTimer(int index, SkillBase2D skill)
+    {
+        if (skill == null || index < 0 || index >= _skillCoolTimers.Length)
+            return;
+
+        StartCoroutine(CoolTimeRoutine(skill, _skillCoolTimers[index]));
     }
 
     IEnumerator CoolTimeRoutine(SkillBase2D skill, GameObject timer)
